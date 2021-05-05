@@ -1,8 +1,11 @@
 package com.bootcamp.desafiospring.melitools.service;
 
 import com.bootcamp.desafiospring.melitools.dto.UserDTO;
-import com.bootcamp.desafiospring.melitools.dto.response.Response;
+import com.bootcamp.desafiospring.melitools.dto.response.BaseResponse;
+import com.bootcamp.desafiospring.melitools.dto.response.ResponseList;
+import com.bootcamp.desafiospring.melitools.dto.response.ResponseSimple;
 import com.bootcamp.desafiospring.melitools.dto.response.ResponseFollowersCount;
+import com.bootcamp.desafiospring.melitools.entity.UserListNode;
 import com.bootcamp.desafiospring.melitools.exception.UserAlreadyFollowedException;
 import com.bootcamp.desafiospring.melitools.exception.UserNotFoundException;
 import com.bootcamp.desafiospring.melitools.repository.MeliToolsRepository;
@@ -15,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 @Service
 public class MeliToolsService {
@@ -32,7 +36,7 @@ public class MeliToolsService {
      * @return {Response} response with HttpStatus and message.
      * @throws IOException if the singleto doesn't find the users file.
      * @throws UserNotFoundException if the user with one of the received ids doesn't exists.*/
-    public Response followUser(int userId, int userIdToFollow) throws IOException, UserNotFoundException,
+    public ResponseSimple followUser(int userId, int userIdToFollow) throws IOException, UserNotFoundException,
             UserAlreadyFollowedException {
         LOGGER.info("Inicio de accion Follow.");
 
@@ -52,9 +56,9 @@ public class MeliToolsService {
             throw new UserAlreadyFollowedException(followed.getUserId(), follower.getUserId());
 
         if (mtRepository.followUser())
-            return new Response(Constants.USER_FOLLOWED, HttpStatus.OK);
+            return new ResponseSimple(Constants.USER_FOLLOWED, HttpStatus.OK);
         else
-            return new Response(Constants.ERROR_USER_FOLLOWED, HttpStatus.BAD_REQUEST);
+            return new ResponseSimple(Constants.ERROR_USER_FOLLOWED, HttpStatus.BAD_REQUEST);
     }
 
     /**
@@ -64,9 +68,27 @@ public class MeliToolsService {
      * @return {ResponseFollowersCount} response with the number of followers of the user with id "userId".*/
     public ResponseFollowersCount countFollowers(int userId) throws UserNotFoundException {
         UserDTO user = mtRepository.searchUser(userId);
-        ResponseFollowersCount response = new ResponseFollowersCount(Constants.CORRECT_FOLLOWERS_COUNT, HttpStatus.OK, user.getUserId(), user.getName(),
+        ResponseFollowersCount response = new ResponseFollowersCount(user.getUserId(), user.getName(),
                 user.getFollowers().size());
         LOGGER.info("Response generado: {}", response.toString());
         return response;
+    }
+
+    /**
+     * Method to get the list of followers of a user.
+     * @author Daniel Alejandro López Hernández
+     * @param userId {int} id of the user
+     * @return {ResponseList} response with the list of users*/
+    public ResponseList listFollowers(int userId) throws UserNotFoundException {
+        UserDTO user = mtRepository.searchUser(userId);
+        UserListNode[] followersInfo = new UserListNode[user.getFollowers().size()];
+        int index = 0;
+        for (int i : user.getFollowers() ) {
+            UserListNode node = new UserListNode(i, mtRepository.searchUser(i).getName());
+            followersInfo[index] = node;
+            index++;
+        }
+        LOGGER.info("El array de seguidores es: {}", Arrays.toString(followersInfo));
+        return new ResponseList(userId, user.getName(), followersInfo);
     }
 }

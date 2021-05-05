@@ -1,7 +1,6 @@
 package com.bootcamp.desafiospring.melitools.controller;
 
 import com.bootcamp.desafiospring.melitools.dto.ResponseErrorDTO;
-import com.bootcamp.desafiospring.melitools.dto.response.Response;
 import com.bootcamp.desafiospring.melitools.exception.UserAlreadyFollowedException;
 import com.bootcamp.desafiospring.melitools.exception.UserNotFoundException;
 import org.slf4j.Logger;

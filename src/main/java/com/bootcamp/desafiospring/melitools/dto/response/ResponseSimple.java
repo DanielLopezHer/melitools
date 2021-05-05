@@ -2,13 +2,13 @@ package com.bootcamp.desafiospring.melitools.dto.response;
 
 import org.springframework.http.HttpStatus;
 
-public class Response {
+public class ResponseSimple {
     private HttpStatus status;
     private String message;
 
-    public Response() { }
+    public ResponseSimple() { }
 
-    public Response(String message, HttpStatus status) {
+    public ResponseSimple(String message, HttpStatus status) {
         this.status = status;
         this.message = message;
     }

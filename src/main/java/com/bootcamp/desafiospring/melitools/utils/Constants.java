@@ -5,6 +5,7 @@ public class Constants {
     public static final String BASE_URL = "/users";
     public static final String FOLLOW_ENDPOINT = "/{userId}/follow/{userIdToFollow}";
     public static final String FOLLOWERS_COUNT_ENDPOINT = "/{userId}/followers/count";
+    public static final String LIST_FOLLOWERS_ENDPOINT = "/{userId}/followers/list";
 
     /* Files */
     public static final String USERS_FILE = "src/main/resources/templates/UsersFile.json";
