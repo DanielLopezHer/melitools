@@ -1,22 +1,28 @@
 package com.bootcamp.desafiospring.melitools.controller;
 
+import com.bootcamp.desafiospring.melitools.dto.response.Response;
+import com.bootcamp.desafiospring.melitools.service.MeliToolsService;
 import com.bootcamp.desafiospring.melitools.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 @RestController(Constants.BASE_URL)
 public class MeliToolsController {
+
+    @Autowired
+    private MeliToolsService mtService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MeliToolsController.class);
 
     @PostMapping(Constants.FOLLOW_ENDPOINT)
-    public HttpStatus followUser(@PathVariable int userId, @PathVariable int userIdToFollow){
+    public Response followUser(@PathVariable int userId, @PathVariable int userIdToFollow) throws IOException {
         LOGGER.info("Llamado al endpoint * Follow *");
-        LOGGER.info("El usuario con userId {}, seguira al usuario con userId {}.", userId, userIdToFollow);
-        return HttpStatus.OK;
+        return mtService.followUser(userId, userIdToFollow);
     }
 }
