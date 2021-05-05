@@ -11,4 +11,5 @@ public class Constants {
     /* Messages */
     public static final String USER_FOLLOWED = "Se siguió al usuario correctamente.";
     public static final String ERROR_USER_FOLLOWED = "No se siguío el usuario.";
+    public static final String ERROR_USER_NOT_FOUND = "No se encontro al usuario con id: ";
 }

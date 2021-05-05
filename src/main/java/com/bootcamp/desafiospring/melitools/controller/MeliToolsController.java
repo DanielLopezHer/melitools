@@ -1,6 +1,7 @@
 package com.bootcamp.desafiospring.melitools.controller;
 
 import com.bootcamp.desafiospring.melitools.dto.response.Response;
+import com.bootcamp.desafiospring.melitools.exception.UserNotFoundException;
 import com.bootcamp.desafiospring.melitools.service.MeliToolsService;
 import com.bootcamp.desafiospring.melitools.utils.Constants;
 import org.slf4j.Logger;
@@ -21,7 +22,7 @@ public class MeliToolsController {
     private static final Logger LOGGER = LoggerFactory.getLogger(MeliToolsController.class);
 
     @PostMapping(Constants.FOLLOW_ENDPOINT)
-    public Response followUser(@PathVariable int userId, @PathVariable int userIdToFollow) throws IOException {
+    public Response followUser(@PathVariable int userId, @PathVariable int userIdToFollow) throws IOException, UserNotFoundException {
         LOGGER.info("Llamado al endpoint * Follow *");
         return mtService.followUser(userId, userIdToFollow);
     }
