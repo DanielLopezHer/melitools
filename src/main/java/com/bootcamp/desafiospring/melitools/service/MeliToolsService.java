@@ -2,9 +2,11 @@ package com.bootcamp.desafiospring.melitools.service;
 
 import com.bootcamp.desafiospring.melitools.dto.UserDTO;
 import com.bootcamp.desafiospring.melitools.dto.response.Response;
+import com.bootcamp.desafiospring.melitools.exception.UserAlreadyFollowedException;
 import com.bootcamp.desafiospring.melitools.exception.UserNotFoundException;
 import com.bootcamp.desafiospring.melitools.repository.MeliToolsRepository;
 import com.bootcamp.desafiospring.melitools.utils.Constants;
+import com.bootcamp.desafiospring.melitools.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,19 +28,31 @@ public class MeliToolsService {
      * @author Daniel Alejandro López Hernández
      * @param userId {int} id of the user who wants to follow other user.
      * @param userIdToFollow {int} id of the user who is going to be followed.
-     * @return {Response} response with HttpStatus and message.*/
-    public Response followUser(int userId, int userIdToFollow) throws IOException, UserNotFoundException {
+     * @return {Response} response with HttpStatus and message.
+     * @throws IOException if the singleto doesn't find the users file.
+     * @throws UserNotFoundException if the user with one of the received ids doesn't exists.*/
+    public Response followUser(int userId, int userIdToFollow) throws IOException, UserNotFoundException,
+            UserAlreadyFollowedException {
         LOGGER.info("Inicio de accion Follow.");
 
         UserDTO follower = mtRepository.searchUser(userId);
         UserDTO followed = mtRepository.searchUser(userIdToFollow);
 
-        follower.getFollowed().add(userIdToFollow);
-        followed.getFollowers().add(userId);
+        if(Utils.searchIdInList(follower.getFollowed(), followed.getUserId())){
+            LOGGER.info("El usuario aun no seguia al otro usuario.");
+            follower.getFollowed().add(userIdToFollow);
+        }else
+            throw new UserAlreadyFollowedException(followed.getUserId(), follower.getUserId());
+
+        if (Utils.searchIdInList(followed.getFollowers(), follower.getUserId())){
+            LOGGER.info("El usuario aun no era seguido por el otro usuario.");
+            followed.getFollowers().add(userId);
+        }else
+            throw new UserAlreadyFollowedException(followed.getUserId(), follower.getUserId());
 
         if (mtRepository.followUser())
-            return new Response(HttpStatus.OK, Constants.USER_FOLLOWED);
+            return new Response(Constants.USER_FOLLOWED, HttpStatus.OK);
         else
-            return new Response(HttpStatus.BAD_REQUEST, Constants.ERROR_USER_FOLLOWED);
+            return new Response(Constants.ERROR_USER_FOLLOWED, HttpStatus.BAD_REQUEST);
     }
 }

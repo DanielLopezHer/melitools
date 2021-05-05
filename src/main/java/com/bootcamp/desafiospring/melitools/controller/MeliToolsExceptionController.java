@@ -1,6 +1,8 @@
 package com.bootcamp.desafiospring.melitools.controller;
 
 import com.bootcamp.desafiospring.melitools.dto.ResponseErrorDTO;
+import com.bootcamp.desafiospring.melitools.dto.response.Response;
+import com.bootcamp.desafiospring.melitools.exception.UserAlreadyFollowedException;
 import com.bootcamp.desafiospring.melitools.exception.UserNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +26,12 @@ public class MeliToolsExceptionController {
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ResponseErrorDTO> UserNotFoundExceptionHandler(UserNotFoundException ex){
         LOGGER.info("No se encontro usuario solicitado.");
-        LOGGER.info(ex.getMessage());
+        return new ResponseEntity<>(ex.getErrorDTO(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UserAlreadyFollowedException.class)
+    public ResponseEntity<ResponseErrorDTO> UserAlreadyFollowedException(UserAlreadyFollowedException ex){
+        LOGGER.info("El usuario solicitado ya se estaba siguiendo.");
         return new ResponseEntity<>(ex.getErrorDTO(), HttpStatus.BAD_REQUEST);
     }
 }

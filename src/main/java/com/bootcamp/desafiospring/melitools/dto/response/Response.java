@@ -8,7 +8,7 @@ public class Response {
 
     public Response() { }
 
-    public Response(HttpStatus status, String message) {
+    public Response(String message, HttpStatus status) {
         this.status = status;
         this.message = message;
     }

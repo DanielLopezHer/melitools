@@ -12,4 +12,5 @@ public class Constants {
     public static final String USER_FOLLOWED = "Se siguió al usuario correctamente.";
     public static final String ERROR_USER_FOLLOWED = "No se siguío el usuario.";
     public static final String ERROR_USER_NOT_FOUND = "No se encontro al usuario con id: ";
+    public static final String USER_ALREADY_FOLLOWED = "El usuario %d ya está siendo seguido por el usuario %d.";
 }
