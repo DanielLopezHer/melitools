@@ -7,4 +7,8 @@ public class Constants {
 
     /* Files */
     public static final String USERS_FILE = "src/main/resources/templates/UsersFile.json";
+
+    /* Messages */
+    public static final String USER_FOLLOWED = "Se siguió al usuario correctamente.";
+    public static final String ERROR_USER_FOLLOWED = "No se siguío el usuario.";
 }
