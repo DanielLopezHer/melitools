@@ -8,6 +8,7 @@ import com.bootcamp.desafiospring.melitools.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,5 +32,14 @@ public class MeliToolsController {
             UserAlreadyFollowedException {
         LOGGER.info("Llamado al endpoint * Follow *");
         return mtService.followUser(userId, userIdToFollow);
+    }
+
+    /**
+     * Returns the number of followers of a user.
+     * @author Daniel Alejandro López Hernández*/
+    @GetMapping(Constants.FOLLOWERS_COUNT_ENDPOINT)
+    public Response followersCount(@PathVariable int userId) throws UserNotFoundException {
+        LOGGER.info("Llamado al endpoint * Count followers *");
+        return mtService.countFollowers(userId);
     }
 }

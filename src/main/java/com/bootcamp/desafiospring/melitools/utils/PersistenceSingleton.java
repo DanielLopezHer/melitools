@@ -3,14 +3,13 @@ package com.bootcamp.desafiospring.melitools.utils;
 import com.bootcamp.desafiospring.melitools.dto.UserDTO;
 import com.bootcamp.desafiospring.melitools.repository.collections.Userscollection;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.catalina.User;
-import org.apache.catalina.startup.UserConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
 
+/*TODO: Documentar singleton junto con su clase de configuración. */
 public class PersistenceSingleton {
     private static final Logger LOGGER = LoggerFactory.getLogger(PersistenceSingleton.class);
 

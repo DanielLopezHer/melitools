@@ -2,6 +2,7 @@ package com.bootcamp.desafiospring.melitools.service;
 
 import com.bootcamp.desafiospring.melitools.dto.UserDTO;
 import com.bootcamp.desafiospring.melitools.dto.response.Response;
+import com.bootcamp.desafiospring.melitools.dto.response.ResponseFollowersCount;
 import com.bootcamp.desafiospring.melitools.exception.UserAlreadyFollowedException;
 import com.bootcamp.desafiospring.melitools.exception.UserNotFoundException;
 import com.bootcamp.desafiospring.melitools.repository.MeliToolsRepository;
@@ -54,5 +55,18 @@ public class MeliToolsService {
             return new Response(Constants.USER_FOLLOWED, HttpStatus.OK);
         else
             return new Response(Constants.ERROR_USER_FOLLOWED, HttpStatus.BAD_REQUEST);
+    }
+
+    /**
+     * Method to get the number of followers of a user
+     * @author Daniel Alejandro López Hernández
+     * @param userId {int} id of the user
+     * @return {ResponseFollowersCount} response with the number of followers of the user with id "userId".*/
+    public ResponseFollowersCount countFollowers(int userId) throws UserNotFoundException {
+        UserDTO user = mtRepository.searchUser(userId);
+        ResponseFollowersCount response = new ResponseFollowersCount(Constants.CORRECT_FOLLOWERS_COUNT, HttpStatus.OK, user.getUserId(), user.getName(),
+                user.getFollowers().size());
+        LOGGER.info("Response generado: {}", response.toString());
+        return response;
     }
 }
