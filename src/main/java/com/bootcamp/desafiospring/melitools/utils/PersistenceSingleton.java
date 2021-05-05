@@ -29,32 +29,12 @@ public class PersistenceSingleton {
         return instance;
     }
 
-    /* Cargar en memoria el contenido de los archivos */
-    // 1) Poder abrir el archivo
     private void loadUsers() throws IOException {
         UserDTO[] readedUsers = objectMapper.readValue(new File(Constants.USERS_FILE), UserDTO[].class);
         for (UserDTO usr : readedUsers) {
             Userscollection.availableUsers.put(usr.getUserId(), usr);
         }
-        imprimeMapa("generado:");
-
-        /*UserDTO newUsr = new UserDTO(3, "Paola", "Alonso");
-
-        *//* Agregar nuevo usuario *//*
-        Userscollection.availableUsers.put(newUsr.getUserId(), newUsr);
-        imprimeMapa("nuevo usuario.");
-
-        *//* Modificar info de un usuario *//*
-        UserDTO userPrueba = Userscollection.availableUsers.get(1);
-        LOGGER.info("Usuario antes de modificar: {}", userPrueba.toString());
-        userPrueba.getFollowed().add(1000);
-        LOGGER.info("Usuario de prueba modificado: {}", userPrueba.toString());
-
-        *//* Acutalizar info del archivo *//*
-        UserDTO[] newUsers = Userscollection.availableUsers.values().toArray(new UserDTO[0]);
-        objectMapper.writeValue(new File(Constants.USERS_FILE), newUsers);
-        imprimeMapa("actualizado.");*/
-
+        imprimeMapa("de usuarios generado:");
     }
 
     /*TODO: Borrar este método ya que solo es para probar el funcionamiento del singleton */
