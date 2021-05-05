@@ -33,4 +33,6 @@ public class MeliToolsExceptionController {
         LOGGER.info("El usuario solicitado ya se estaba siguiendo.");
         return new ResponseEntity<>(ex.getErrorDTO(), HttpStatus.BAD_REQUEST);
     }
+
+    /*TODO: Manejar excepción de parseo de dato (cuando no se manda un int en el id)*/
 }

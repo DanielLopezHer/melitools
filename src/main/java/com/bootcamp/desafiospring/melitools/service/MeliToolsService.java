@@ -91,4 +91,22 @@ public class MeliToolsService {
         LOGGER.info("El array de seguidores es: {}", Arrays.toString(followersInfo));
         return new ResponseList(userId, user.getName(), followersInfo);
     }
+
+    /**
+     * Method to get the list of followed sellers of a user.
+     * @author Daniel Alejandro López Hernández
+     * @param userId {int} id of the user
+     * @return {ResponseList} response with the list of sellers*/
+    public ResponseList listFollowed(int userId) throws UserNotFoundException {
+        UserDTO user = mtRepository.searchUser(userId);
+        UserListNode[] followedInfo = new UserListNode[user.getFollowed().size()];
+        int index = 0;
+        for (int i : user.getFollowed() ) {
+            UserListNode node = new UserListNode(i, mtRepository.searchUser(i).getName());
+            followedInfo[index] = node;
+            index++;
+        }
+        LOGGER.info("El array de vendedores seguidos es: {}", Arrays.toString(followedInfo));
+        return new ResponseList(userId, user.getName(), followedInfo);
+    }
 }

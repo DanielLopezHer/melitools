@@ -52,4 +52,10 @@ public class MeliToolsController {
         LOGGER.info("Llamado al endpoint * List followers *");
         return mtService.listFollowers(userId);
     }
+
+    @GetMapping(Constants.LIST_FOLLOWED_ENDPOINT)
+    public BaseResponse listFollowed(@PathVariable int userId) throws UserNotFoundException {
+        LOGGER.info("Llamado al endpoint * List followed *");
+        return mtService.listFollowed(userId);
+    }
 }
