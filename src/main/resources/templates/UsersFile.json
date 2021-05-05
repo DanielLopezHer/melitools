@@ -3,7 +3,7 @@
 		"userId": 1,
 		"name": "Daniel",
 		"lastName": "López",
-		"followers": [1,2,3,4,5,6,7,8,9,10],
+		"followers": [2,3,4,5,6,7,8,9,10],
 		"followed": [],
 		"posts": [],
 		"specialPosts": []
@@ -13,7 +13,7 @@
 		"name": "Julieta",
 		"lastName": "López",
 		"followers": [],
-		"followed": [],
+		"followed": [1],
 		"posts": [],
 		"specialPosts": []
 	}
