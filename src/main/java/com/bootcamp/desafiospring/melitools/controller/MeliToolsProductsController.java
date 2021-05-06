@@ -4,7 +4,6 @@ import com.bootcamp.desafiospring.melitools.dto.PostDTO;
 import com.bootcamp.desafiospring.melitools.dto.response.ResponseSimple;
 import com.bootcamp.desafiospring.melitools.exception.DateNotValidException;
 import com.bootcamp.desafiospring.melitools.exception.PostIdAlreadyAssignedException;
-import com.bootcamp.desafiospring.melitools.exception.ProductIdAlreadyAssignedException;
 import com.bootcamp.desafiospring.melitools.exception.UserNotFoundException;
 import com.bootcamp.desafiospring.melitools.service.MeliToolsService;
 import com.bootcamp.desafiospring.melitools.utils.Constants;

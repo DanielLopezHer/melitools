@@ -34,7 +34,6 @@ public class MeliToolsExceptionController {
         return new ResponseEntity<>(ex.getErrorDTO(), HttpStatus.BAD_REQUEST);
     }
 
-    /*TODO: Manejar excepción de parseo de dato (cuando no se manda un int en el id)*/
     /*TODO: Documentar controller de exceptions*/
 
     @ExceptionHandler(PostIdAlreadyAssignedException.class)
