@@ -21,7 +21,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Repository
-public class MeliToolsRepository {
+public class MeliToolsRepository implements MeliToolsRepositoryInterface{
 
     private final PersistenceSingleton persistence = PersistenceSingleton.getInstance();
 
@@ -85,8 +85,6 @@ public class MeliToolsRepository {
         PostsCollection.availablePosts.put(post.getId_post(), post);
         return persistence.updatePostsFile();
     }
-
-    /* TODO: Crear interfaz para este repository */
 
     /**
      * Returns a list of Posts of users followed by the user with id "userId" and that are within the period of N weeks.
