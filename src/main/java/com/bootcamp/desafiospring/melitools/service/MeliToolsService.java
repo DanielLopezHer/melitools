@@ -2,10 +2,7 @@ package com.bootcamp.desafiospring.melitools.service;
 
 import com.bootcamp.desafiospring.melitools.dto.PostDTO;
 import com.bootcamp.desafiospring.melitools.dto.UserDTO;
-import com.bootcamp.desafiospring.melitools.dto.response.ResponseList;
-import com.bootcamp.desafiospring.melitools.dto.response.ResponseRecentPosts;
-import com.bootcamp.desafiospring.melitools.dto.response.ResponseSimple;
-import com.bootcamp.desafiospring.melitools.dto.response.ResponseFollowersCount;
+import com.bootcamp.desafiospring.melitools.dto.response.*;
 import com.bootcamp.desafiospring.melitools.entity.UserListNode;
 import com.bootcamp.desafiospring.melitools.exception.*;
 import com.bootcamp.desafiospring.melitools.repository.MeliToolsRepository;
@@ -84,11 +81,11 @@ public class MeliToolsService implements MeliToolsServiceInterface{
      * Method to get the list of followers of a user.
      *
      * @param userId {int} id of the user
-     * @return {ResponseList} response with the list of users
+     * @return {ResponseListFollower} response with the list of users
      * @author Daniel Alejandro López Hernández
      * @throws UserNotFoundException if the user is not found.
      */
-    public ResponseList listFollowers(int userId, String order) throws UserNotFoundException {
+    public ResponseListFollower listFollowers(int userId, String order) throws UserNotFoundException {
         UserDTO user = mtRepository.searchUser(userId);
         UserListNode[] followersInfo = new UserListNode[user.getFollowers().size()];
         int index = 0;
@@ -99,18 +96,18 @@ public class MeliToolsService implements MeliToolsServiceInterface{
         }
         followersInfo = Utils.sorter(Arrays.asList(followersInfo.clone()), order).toArray(new UserListNode[0]);
         LOGGER.info("El array de seguidores es: {}", Arrays.toString(followersInfo));
-        return new ResponseList(userId, user.getName(), followersInfo);
+        return new ResponseListFollower(userId, user.getName(), followersInfo);
     }
 
     /**
      * Method to get the list of followed sellers of a user.
      *
      * @param userId {int} id of the user
-     * @return {ResponseList} response with the list of sellers
+     * @return {ResponseListFollowed} response with the list of sellers
      * @author Daniel Alejandro López Hernández
      * @throws UserNotFoundException if the user is not found.
      */
-    public ResponseList listFollowed(int userId, String order) throws UserNotFoundException {
+    public ResponseListFollowed listFollowed(int userId, String order) throws UserNotFoundException {
         UserDTO user = mtRepository.searchUser(userId);
         UserListNode[] followedInfo = new UserListNode[user.getFollowed().size()];
         int index = 0;
@@ -121,7 +118,7 @@ public class MeliToolsService implements MeliToolsServiceInterface{
         }
         followedInfo = Utils.sorter(Arrays.asList(followedInfo.clone()), order).toArray(new UserListNode[0]);
         LOGGER.info("El array de vendedores seguidos es: {}", Arrays.toString(followedInfo));
-        return new ResponseList(userId, user.getName(), followedInfo);
+        return new ResponseListFollowed(userId, user.getName(), followedInfo);
     }
 
     /**
