@@ -1,18 +1,20 @@
 package com.bootcamp.desafiospring.melitools.dto;
 
+import com.bootcamp.desafiospring.melitools.entity.ProductEntity;
+
 import java.util.Date;
 
 public class PostDTO {
     private int userId;
     private int id_post;
     private Date date;
-    private ProductDTO detail;
+    private ProductEntity detail;
     private int category;
     private double price;
 
     public PostDTO() { }
 
-    public PostDTO(int userId, int id_post, Date date, ProductDTO detail, int category, double price) {
+    public PostDTO(int userId, int id_post, Date date, ProductEntity detail, int category, double price) {
         this.userId = userId;
         this.id_post = id_post;
         this.date = date;
@@ -45,11 +47,11 @@ public class PostDTO {
         this.date = date;
     }
 
-    public ProductDTO getDetail() {
+    public ProductEntity getDetail() {
         return detail;
     }
 
-    public void setDetail(ProductDTO detail) {
+    public void setDetail(ProductEntity detail) {
         this.detail = detail;
     }
 

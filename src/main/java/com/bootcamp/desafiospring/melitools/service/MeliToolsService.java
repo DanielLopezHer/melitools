@@ -1,5 +1,6 @@
 package com.bootcamp.desafiospring.melitools.service;
 
+import com.bootcamp.desafiospring.melitools.dto.PostDTO;
 import com.bootcamp.desafiospring.melitools.dto.UserDTO;
 import com.bootcamp.desafiospring.melitools.dto.response.BaseResponse;
 import com.bootcamp.desafiospring.melitools.dto.response.ResponseList;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Date;
 
 @Service
 public class MeliToolsService {
@@ -108,5 +110,30 @@ public class MeliToolsService {
         }
         LOGGER.info("El array de vendedores seguidos es: {}", Arrays.toString(followedInfo));
         return new ResponseList(userId, user.getName(), followedInfo);
+    }
+
+    public ResponseSimple generatePost(PostDTO request) throws UserNotFoundException {
+        UserDTO user = mtRepository.searchUser(request.getUserId());
+        Date datePost = request.getDate();
+
+        if(mtRepository.searchPostId(request.getId_post())){
+            if(mtRepository.searchProductId(request.getDetail().getProduct_id())){
+                if(validateDate(datePost)){
+
+                }else{
+                    /* Exception fecha no válida */
+                }
+            }else{
+                /* Exception ya existe producto con ese id */
+            }
+        } else{
+            /* Exception ya existe post con ese id */
+        }
+
+        return null;
+    }
+
+    private boolean validateDate(Date postDate){
+        return false;
     }
 }

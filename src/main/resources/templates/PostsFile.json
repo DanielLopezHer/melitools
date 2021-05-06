@@ -1,0 +1,77 @@
+[
+  {
+    "userId": 1,
+    "id_post": 1,
+    "date": "2021-01-05",
+    "detail": {
+      "product_id": 1,
+      "productName": "Silla Gamer",
+      "type": "Gamer",
+      "brand": "Razer",
+      "color": "Red & Black",
+      "notes": "Special edition."
+    },
+    "category": 1,
+    "price": 1500.50
+  },
+  {
+    "userId": 1,
+    "id_post": 2,
+    "date": "2021-01-05",
+    "detail": {
+      "product_id": 2,
+      "productName": "Teclado Gamer",
+      "type": "Gamer",
+      "brand": "Razer",
+      "color": "Red & Black",
+      "notes": "Special edition."
+    },
+    "category": 1,
+    "price": 1500.50
+  },
+  {
+    "userId": 1,
+    "id_post": 3,
+    "date": "2021-01-05",
+    "detail": {
+      "product_id": 3,
+      "productName": "Mouse Gamer",
+      "type": "Gamer",
+      "brand": "Razer",
+      "color": "Red & Black",
+      "notes": "Special edition."
+    },
+    "category": 1,
+    "price": 1500.50
+  },
+  {
+    "userId": 1,
+    "id_post": 4,
+    "date": "2021-01-05",
+    "detail": {
+      "product_id": 4,
+      "productName": "Monitor Gamer",
+      "type": "Gamer",
+      "brand": "Razer",
+      "color": "Red & Black",
+      "notes": "Special edition."
+    },
+    "category": 1,
+    "price": 1500.50
+  },
+  {
+    "userId": 1,
+    "id_post": 5,
+    "date": "2021-01-05",
+    "detail": {
+      "product_id": 5,
+      "productName": "Laptop Gamer",
+      "type": "Gamer",
+      "brand": "Razer",
+      "color": "Red & Black",
+      "notes": "Special edition."
+    },
+    "category": 1,
+    "price": 1500.50
+  }
+]

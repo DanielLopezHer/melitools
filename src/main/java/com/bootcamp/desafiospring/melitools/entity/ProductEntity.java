@@ -1,6 +1,6 @@
-package com.bootcamp.desafiospring.melitools.dto;
+package com.bootcamp.desafiospring.melitools.entity;
 
-public class ProductDTO {
+public class ProductEntity {
     private int product_id;
     private String productName;
     private String type;
@@ -8,9 +8,9 @@ public class ProductDTO {
     private String color;
     private String notes;
 
-    public ProductDTO() { }
+    public ProductEntity() { }
 
-    public ProductDTO(int product_id, String productName, String type, String brand, String color, String notes) {
+    public ProductEntity(int product_id, String productName, String type, String brand, String color, String notes) {
         this.product_id = product_id;
         this.productName = productName;
         this.type = type;

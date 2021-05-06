@@ -2,6 +2,8 @@ package com.bootcamp.desafiospring.melitools.repository;
 
 import com.bootcamp.desafiospring.melitools.dto.UserDTO;
 import com.bootcamp.desafiospring.melitools.exception.UserNotFoundException;
+import com.bootcamp.desafiospring.melitools.repository.collections.PostsCollection;
+import com.bootcamp.desafiospring.melitools.repository.collections.ProductsCollection;
 import com.bootcamp.desafiospring.melitools.repository.collections.Userscollection;
 import com.bootcamp.desafiospring.melitools.utils.Constants;
 import com.bootcamp.desafiospring.melitools.utils.PersistenceSingleton;
@@ -45,5 +47,25 @@ public class MeliToolsRepository {
      * @throws IOException in case of don't find the users file.*/
     public boolean followUser() throws IOException {
         return persistence.updateUsersFile();
+    }
+
+    /**
+     * Method to identify if a post id already exists
+     * @author Daniel Alejandro López Hernández
+     * @param id {int} id to search
+     * @return {boolean} true if the id don't exists*/
+    public boolean searchPostId(int id){
+        LOGGER.info("Buscando id {} en publicaciones.", id);
+        return !PostsCollection.availablePosts.containsKey(id);
+    }
+
+    /**
+     * Method to identify if a product id already exists
+     * @author Daniel Alejandro López Hernández
+     * @param id {int} id to search
+     * @return {boolean} true if the id don't exists*/
+    public boolean searchProductId(int id){
+        LOGGER.info("Buscando id {} en productos.", id);
+        return !ProductsCollection.availableProducts.containsKey(id);
     }
 }

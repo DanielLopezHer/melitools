@@ -1,6 +1,9 @@
 package com.bootcamp.desafiospring.melitools.utils;
 
+import com.bootcamp.desafiospring.melitools.dto.PostDTO;
 import com.bootcamp.desafiospring.melitools.dto.UserDTO;
+import com.bootcamp.desafiospring.melitools.repository.collections.PostsCollection;
+import com.bootcamp.desafiospring.melitools.repository.collections.ProductsCollection;
 import com.bootcamp.desafiospring.melitools.repository.collections.Userscollection;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -9,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 
-/*TODO: Documentar singleton junto con su clase de configuración. */
 public class PersistenceSingleton {
     private static final Logger LOGGER = LoggerFactory.getLogger(PersistenceSingleton.class);
 
@@ -18,8 +20,12 @@ public class PersistenceSingleton {
 
     private PersistenceSingleton() throws IOException {
         loadUsers();
+        loadPosts();
     }
 
+    /**
+     * Generate an instance of the singleton to simulate the database.
+     * @author Daniel Alejandro López Hernández */
     public static PersistenceSingleton getInstance() throws IOException {
         if (instance == null) {
             LOGGER.info("Se genera singleton para persistencia.");
@@ -28,20 +34,42 @@ public class PersistenceSingleton {
         return instance;
     }
 
+    /**
+     * Reads and loads in memory the content of the UsersFile
+     * @author Daniel Alejandro López Hernández
+     * @throws IOException if the file was not found.*/
     private void loadUsers() throws IOException {
         UserDTO[] readedUsers = objectMapper.readValue(new File(Constants.USERS_FILE), UserDTO[].class);
         for (UserDTO usr : readedUsers) {
             Userscollection.availableUsers.put(usr.getUserId(), usr);
         }
-        imprimeMapa("de usuarios generado:");
+        printMap("de usuarios generado:", 1);
     }
 
-    /*TODO: Borrar este método ya que solo es para probar el funcionamiento del singleton */
-    private void imprimeMapa(String msj){
+    /**
+     * Utility to watch the content of a map in memory.
+     * @author Daniel Alejandro López Hernández
+     * @param msj {String} message to display
+     * @param op {int} number of the map to display 1: users, 2: posts, 3: products*/
+    private void printMap(String msj, int op){
         LOGGER.info("Mapa {}: ", msj);
-        LOGGER.info(Userscollection.availableUsers.toString());
+        switch (op){
+            case 1:
+                LOGGER.info(Userscollection.availableUsers.toString());
+                break;
+            case 2:
+                LOGGER.info(PostsCollection.availablePosts.toString());
+                break;
+            case 3:
+                LOGGER.info(ProductsCollection.availableProducts.toString());
+                break;
+        }
     }
 
+    /**
+     * Method to persis changes on the Users map into the file
+     * @author Daniel Alejandro López Hernández
+     * @throws IOException if the file is was not found.*/
     public boolean updateUsersFile() throws IOException {
         LOGGER.info("Guardando cambios en archivo.");
         UserDTO[] newUsers = Userscollection.availableUsers.values().toArray(new UserDTO[0]);
@@ -49,4 +77,15 @@ public class PersistenceSingleton {
         return true;
     }
 
+    /**
+     * Reads and loads in memory the content of the PostsFile
+     * @author Daniel Alejandro López Hernández
+     * @throws IOException if the file was not found.*/
+    private void loadPosts() throws IOException{
+        PostDTO[] readedPosts = objectMapper.readValue(new File(Constants.POSTS_FILE), PostDTO[].class);
+        for (PostDTO post : readedPosts) {
+            PostsCollection.availablePosts.put(post.getId_post(), post);
+        }
+        printMap("de posts generado:", 2);
+    }
 }

@@ -1,5 +1,6 @@
 package com.bootcamp.desafiospring.melitools.controller;
 
+import com.bootcamp.desafiospring.melitools.dto.PostDTO;
 import com.bootcamp.desafiospring.melitools.dto.response.BaseResponse;
 import com.bootcamp.desafiospring.melitools.dto.response.ResponseSimple;
 import com.bootcamp.desafiospring.melitools.exception.UserAlreadyFollowedException;
@@ -9,20 +10,17 @@ import com.bootcamp.desafiospring.melitools.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
 @RestController(Constants.BASE_URL)
-public class MeliToolsController {
+public class MeliToolsUsersController {
 
     @Autowired
     private MeliToolsService mtService;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MeliToolsController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MeliToolsUsersController.class);
 
     /**
      * Performs "Follow" action
@@ -53,6 +51,9 @@ public class MeliToolsController {
         return mtService.listFollowers(userId);
     }
 
+    /**
+     * Returns the list of followed sellers of a user.
+     * @author Daniel Alejandro López Hernández.*/
     @GetMapping(Constants.LIST_FOLLOWED_ENDPOINT)
     public BaseResponse listFollowed(@PathVariable int userId) throws UserNotFoundException {
         LOGGER.info("Llamado al endpoint * List followed *");
