@@ -88,9 +88,16 @@ public class MeliToolsRepository {
 
     /* TODO: Crear interfaz para este repository */
 
-    public PostDTO[] searchUsersPosts(int userId) throws UserNotFoundException {
+    /**
+     * Returns a list of Posts of users followed by the user with id "userId" and that are within the period of N weeks.
+     * @author Daniel Alejandro López Hernández
+     * @param userId {int} id of the user.
+     * @return {List<PostDTO>} list with the posts found.*
+     * @throws UserNotFoundException if the userId doesn't exists.*/
+    public List<PostDTO> searchUsersRecentPosts(int userId) throws UserNotFoundException {
         UserDTO user = searchUser(userId);
         Date actualDate = new Date();
+
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
         calendar.add(Calendar.WEEK_OF_YEAR, Constants.PERIOD_FOR_RECENT_POSTS);
@@ -100,8 +107,7 @@ public class MeliToolsRepository {
 
         Predicate<PostDTO> isPostOfFollowed = p -> user.getFollowed().contains(p.getUserId());
         Predicate<PostDTO> dateIsRecent = p -> p.getDate().after(lessDate) && p.getDate().before(actualDate);
-
-        PostsCollection.availablePosts.values().stream().filter(isPostOfFollowed.and(dateIsRecent)).forEach(p -> LOGGER.info(p.toString()));
-        return null;
+        return PostsCollection.availablePosts.values().stream().filter(isPostOfFollowed.and(dateIsRecent))
+                .collect(Collectors.toList());
     }
 }

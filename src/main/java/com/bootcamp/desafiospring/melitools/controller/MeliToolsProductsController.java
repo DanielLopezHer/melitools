@@ -33,6 +33,9 @@ public class MeliToolsProductsController {
         return mtService.generatePost(request);
     }
 
+    /**
+     * Resturs the list of the recent posts of the followed users of the user with id userId.
+     * @author Daniel Alejandro López Hernández.*/
     @GetMapping(Constants.GET_RECENT_POSTS)
     public BaseResponse getRecentPosts(@PathVariable int userId) throws UserNotFoundException {
         LOGGER.info("Llamado al endpoint * Recent Posts *");

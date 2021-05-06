@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class MeliToolsService {
@@ -162,12 +163,15 @@ public class MeliToolsService {
         return actualDate.before(postDate);
     }
 
+    /**
+     * Method that returns a list with the most recent publications of the users followed by the user with id "userId".
+     * @author Daniel Alejandro López Hernández
+     * @param userId {int} id of the user
+     * @return {ResponseRecentPosts} response with the list of the posts.
+     * @throws UserNotFoundException if the id of the user doesn't exists.*/
     public ResponseRecentPosts getRecentPosts(int userId) throws UserNotFoundException {
         LOGGER.info("Consultando las publicaciones de los vendedores seguidos por usuario con id: {}", userId);
-        PostDTO[] postsFollowed = mtRepository.searchUsersPosts(userId);
-        /*for (PostDTO post : postsFollowed) {
-            LOGGER.info(post.toString());
-        }*/
-        return new ResponseRecentPosts();
+        List<PostDTO> postsFollowed = mtRepository.searchUsersRecentPosts(userId);
+        return new ResponseRecentPosts(userId, mtRepository.searchUser(userId).getName(), postsFollowed.toArray(new PostDTO[0]));
     }
 }
