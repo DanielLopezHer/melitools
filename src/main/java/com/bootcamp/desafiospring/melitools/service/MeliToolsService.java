@@ -2,13 +2,11 @@ package com.bootcamp.desafiospring.melitools.service;
 
 import com.bootcamp.desafiospring.melitools.dto.PostDTO;
 import com.bootcamp.desafiospring.melitools.dto.UserDTO;
-import com.bootcamp.desafiospring.melitools.dto.response.BaseResponse;
 import com.bootcamp.desafiospring.melitools.dto.response.ResponseList;
 import com.bootcamp.desafiospring.melitools.dto.response.ResponseSimple;
 import com.bootcamp.desafiospring.melitools.dto.response.ResponseFollowersCount;
 import com.bootcamp.desafiospring.melitools.entity.UserListNode;
-import com.bootcamp.desafiospring.melitools.exception.UserAlreadyFollowedException;
-import com.bootcamp.desafiospring.melitools.exception.UserNotFoundException;
+import com.bootcamp.desafiospring.melitools.exception.*;
 import com.bootcamp.desafiospring.melitools.repository.MeliToolsRepository;
 import com.bootcamp.desafiospring.melitools.utils.Constants;
 import com.bootcamp.desafiospring.melitools.utils.Utils;
@@ -32,12 +30,14 @@ public class MeliToolsService {
 
     /**
      * Method to follow a user
-     * @author Daniel Alejandro López Hernández
-     * @param userId {int} id of the user who wants to follow other user.
+     *
+     * @param userId         {int} id of the user who wants to follow other user.
      * @param userIdToFollow {int} id of the user who is going to be followed.
      * @return {Response} response with HttpStatus and message.
-     * @throws IOException if the singleto doesn't find the users file.
-     * @throws UserNotFoundException if the user with one of the received ids doesn't exists.*/
+     * @throws IOException           if the singleto doesn't find the users file.
+     * @throws UserNotFoundException if the user with one of the received ids doesn't exists.
+     * @author Daniel Alejandro López Hernández
+     */
     public ResponseSimple followUser(int userId, int userIdToFollow) throws IOException, UserNotFoundException,
             UserAlreadyFollowedException {
         LOGGER.info("Inicio de accion Follow.");
@@ -45,19 +45,19 @@ public class MeliToolsService {
         UserDTO follower = mtRepository.searchUser(userId);
         UserDTO followed = mtRepository.searchUser(userIdToFollow);
 
-        if(Utils.searchIdInList(follower.getFollowed(), followed.getUserId())){
+        if (Utils.searchIdInList(follower.getFollowed(), followed.getUserId())) {
             LOGGER.info("El usuario aun no seguia al otro usuario.");
             follower.getFollowed().add(userIdToFollow);
-        }else
+        } else
             throw new UserAlreadyFollowedException(followed.getUserId(), follower.getUserId());
 
-        if (Utils.searchIdInList(followed.getFollowers(), follower.getUserId())){
+        if (Utils.searchIdInList(followed.getFollowers(), follower.getUserId())) {
             LOGGER.info("El usuario aun no era seguido por el otro usuario.");
             followed.getFollowers().add(userId);
-        }else
+        } else
             throw new UserAlreadyFollowedException(followed.getUserId(), follower.getUserId());
 
-        if (mtRepository.followUser())
+        if (mtRepository.updateUsers())
             return new ResponseSimple(Constants.USER_FOLLOWED, HttpStatus.OK);
         else
             return new ResponseSimple(Constants.ERROR_USER_FOLLOWED, HttpStatus.BAD_REQUEST);
@@ -65,9 +65,11 @@ public class MeliToolsService {
 
     /**
      * Method to get the number of followers of a user
-     * @author Daniel Alejandro López Hernández
+     *
      * @param userId {int} id of the user
-     * @return {ResponseFollowersCount} response with the number of followers of the user with id "userId".*/
+     * @return {ResponseFollowersCount} response with the number of followers of the user with id "userId".
+     * @author Daniel Alejandro López Hernández
+     */
     public ResponseFollowersCount countFollowers(int userId) throws UserNotFoundException {
         UserDTO user = mtRepository.searchUser(userId);
         ResponseFollowersCount response = new ResponseFollowersCount(user.getUserId(), user.getName(),
@@ -78,14 +80,16 @@ public class MeliToolsService {
 
     /**
      * Method to get the list of followers of a user.
-     * @author Daniel Alejandro López Hernández
+     *
      * @param userId {int} id of the user
-     * @return {ResponseList} response with the list of users*/
+     * @return {ResponseList} response with the list of users
+     * @author Daniel Alejandro López Hernández
+     */
     public ResponseList listFollowers(int userId) throws UserNotFoundException {
         UserDTO user = mtRepository.searchUser(userId);
         UserListNode[] followersInfo = new UserListNode[user.getFollowers().size()];
         int index = 0;
-        for (int i : user.getFollowers() ) {
+        for (int i : user.getFollowers()) {
             UserListNode node = new UserListNode(i, mtRepository.searchUser(i).getName());
             followersInfo[index] = node;
             index++;
@@ -96,14 +100,16 @@ public class MeliToolsService {
 
     /**
      * Method to get the list of followed sellers of a user.
-     * @author Daniel Alejandro López Hernández
+     *
      * @param userId {int} id of the user
-     * @return {ResponseList} response with the list of sellers*/
+     * @return {ResponseList} response with the list of sellers
+     * @author Daniel Alejandro López Hernández
+     */
     public ResponseList listFollowed(int userId) throws UserNotFoundException {
         UserDTO user = mtRepository.searchUser(userId);
         UserListNode[] followedInfo = new UserListNode[user.getFollowed().size()];
         int index = 0;
-        for (int i : user.getFollowed() ) {
+        for (int i : user.getFollowed()) {
             UserListNode node = new UserListNode(i, mtRepository.searchUser(i).getName());
             followedInfo[index] = node;
             index++;
@@ -112,28 +118,46 @@ public class MeliToolsService {
         return new ResponseList(userId, user.getName(), followedInfo);
     }
 
-    public ResponseSimple generatePost(PostDTO request) throws UserNotFoundException {
+    /*TODO: Refactorizar este método*/
+    /**
+     * Method that performs the registration of a publication and stores the information in the database.
+     * @author Daniel Alejandro López Hernández
+     * @param request {PostDTO} Model of the publication to be registered.
+     * @return {ResponseSimple} Response with the publication record status.
+     * @throws UserNotFoundException If the id of the user who makes the publication does not exist.
+     * @throws PostIdAlreadyAssignedException If there is already a publication with the indicated id.
+     * @throws DateNotValidException If the date does not meet the required characteristics.
+     * @throws IOException If there is a problem updating the archive files.*/
+    public ResponseSimple generatePost(PostDTO request) throws UserNotFoundException, PostIdAlreadyAssignedException,
+            DateNotValidException, IOException {
         UserDTO user = mtRepository.searchUser(request.getUserId());
         Date datePost = request.getDate();
 
-        if(mtRepository.searchPostId(request.getId_post())){
-            if(mtRepository.searchProductId(request.getDetail().getProduct_id())){
-                if(validateDate(datePost)){
-
-                }else{
-                    /* Exception fecha no válida */
+        if (mtRepository.searchPostId(request.getId_post())) {
+            if (mtRepository.searchProductId(request.getDetail().getProduct_id()))
+                if(mtRepository.registerProduct(request.getDetail()))
+                    LOGGER.info("El producto {} se registro correctamente.", request.getDetail().getProduct_id());
+            if (validateDate(datePost)) {
+                if(mtRepository.registerPost(request)) {
+                    LOGGER.info("El Post con id: {} fue registrado.", request.getId_post());
+                    user.getPosts().add(request.getId_post());
+                    if (mtRepository.updateUsers())
+                        LOGGER.info("Se actualizo el archivo de usuarios");
                 }
-            }else{
-                /* Exception ya existe producto con ese id */
-            }
-        } else{
-            /* Exception ya existe post con ese id */
-        }
-
-        return null;
+            } else
+                throw new DateNotValidException(Constants.DATE_NOT_VALID, HttpStatus.BAD_REQUEST);
+        } else
+            throw new PostIdAlreadyAssignedException(Constants.POST_ID_ASSIGNED, HttpStatus.BAD_REQUEST);
+        return new ResponseSimple(Constants.POST_GENERATED, HttpStatus.OK);
     }
 
-    private boolean validateDate(Date postDate){
-        return false;
+    /**
+     * Method that performs the validations of a date.
+     * @author Daniel Alejandro López Hernández
+     * @param postDate {Date} Date to be validated.
+     * @return {boolean} true if the date is valid.*/
+    private boolean validateDate(Date postDate) {
+        Date actualDate = new Date();
+        return actualDate.before(postDate);
     }
 }

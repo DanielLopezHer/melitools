@@ -69,11 +69,11 @@ public class PersistenceSingleton {
     }
 
     /**
-     * Method to persis changes on the Users map into the file
+     * Method to persist changes of the Users map into the file
      * @author Daniel Alejandro López Hernández
      * @throws IOException if the file is was not found.*/
     public boolean updateUsersFile() throws IOException {
-        LOGGER.info("Guardando cambios en archivo.");
+        LOGGER.info("Guardando cambios en archivo de usuarios.");
         UserDTO[] newUsers = Userscollection.availableUsers.values().toArray(new UserDTO[0]);
         objectMapper.writeValue(new File(Constants.USERS_FILE), newUsers);
         return true;
@@ -101,5 +101,27 @@ public class PersistenceSingleton {
             ProductsCollection.availableProducts.put(product.getProduct_id(), product);
         }
         printMap("de products generado:", 3);
+    }
+
+    /**
+     * Method to persist changes of the Products map into the file
+     * @author Daniel Alejandro López Hernández
+     * @throws IOException if the file is was not found.*/
+    public boolean updateProductFile() throws IOException {
+        LOGGER.info("Guardando cambios en archivo de productos.");
+        ProductEntity[] newProducts = ProductsCollection.availableProducts.values().toArray(new ProductEntity[0]);
+        objectMapper.writeValue(new File(Constants.PRODUCTS_FILE), newProducts);
+        return true;
+    }
+
+    /**
+     * Method to persist changes of the Posts map into the file
+     * @author Daniel Alejandro López Hernández
+     * @throws IOException if the file is was not found.*/
+    public boolean updatePostsFile() throws IOException {
+        LOGGER.info("Guardando cambios en archivos de publicaciones.");
+        PostDTO[] newPosts = PostsCollection.availablePosts.values().toArray(new PostDTO[0]);
+        objectMapper.writeValue(new File(Constants.POSTS_FILE), newPosts);
+        return true;
     }
 }

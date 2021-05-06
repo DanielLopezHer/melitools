@@ -1,11 +1,12 @@
 package com.bootcamp.desafiospring.melitools.repository;
 
+import com.bootcamp.desafiospring.melitools.dto.PostDTO;
 import com.bootcamp.desafiospring.melitools.dto.UserDTO;
+import com.bootcamp.desafiospring.melitools.entity.ProductEntity;
 import com.bootcamp.desafiospring.melitools.exception.UserNotFoundException;
 import com.bootcamp.desafiospring.melitools.repository.collections.PostsCollection;
 import com.bootcamp.desafiospring.melitools.repository.collections.ProductsCollection;
 import com.bootcamp.desafiospring.melitools.repository.collections.Userscollection;
-import com.bootcamp.desafiospring.melitools.utils.Constants;
 import com.bootcamp.desafiospring.melitools.utils.PersistenceSingleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +46,7 @@ public class MeliToolsRepository {
      * @author Daniel Alejandro López Hernández
      * @return {boolean} returns true if the file was updated.
      * @throws IOException in case of don't find the users file.*/
-    public boolean followUser() throws IOException {
+    public boolean updateUsers() throws IOException {
         return persistence.updateUsersFile();
     }
 
@@ -68,4 +69,16 @@ public class MeliToolsRepository {
         LOGGER.info("Buscando id {} en productos.", id);
         return !ProductsCollection.availableProducts.containsKey(id);
     }
+
+    public boolean registerProduct(ProductEntity product) throws IOException {
+        ProductsCollection.availableProducts.put(product.getProduct_id(), product);
+        return persistence.updateProductFile();
+    }
+
+    public boolean registerPost(PostDTO post) throws IOException {
+        PostsCollection.availablePosts.put(post.getId_post(), post);
+        return persistence.updatePostsFile();
+    }
+
+    /* TODO: Crear interfaz para este repository */
 }

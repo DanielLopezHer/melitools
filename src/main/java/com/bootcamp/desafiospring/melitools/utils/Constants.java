@@ -20,9 +20,18 @@ public class Constants {
     public static final String ERROR_USER_NOT_FOUND = "No se encontro al usuario con id: ";
     public static final String USER_ALREADY_FOLLOWED = "El usuario %d ya está siendo seguido por el usuario %d.";
 
+    public static final String POST_ID_ASSIGNED = "El id de la publicación ingresado ya está en uso.";
+    public static final String DATE_NOT_VALID = "La fecha de la publicación debe ser superior a la actual.";
+    public static final String POST_GENERATED = "!El post fue creado con éxito!";
+    public static final String MESSAGE_ERROR_PARSING = "Por favor, verifica el contenido de tu petición.";
+
     /* Patterns */
     public static final String DATE_FORMAT = "dd-MM-yyyy";
 
     /* Time zone */
+    /*TODO: revisar que cosas se pueden setear por properties */
     public static final String TIME_ZONE = "America/Mexico_City";
+
+    /* Others */
+    public static final String ERROR_PARSE_EXCEPTION = "HttpMessageNotReadableException";
 }
