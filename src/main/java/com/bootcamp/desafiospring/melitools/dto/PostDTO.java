@@ -26,6 +26,7 @@ public class PostDTO {
         this.price = price;
     }
 
+
     public int getUserId() {
         return userId;
     }

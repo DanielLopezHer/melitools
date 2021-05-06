@@ -75,7 +75,7 @@ public class PersistenceSingleton {
     public boolean updateUsersFile() throws IOException {
         LOGGER.info("Guardando cambios en archivo de usuarios.");
         UserDTO[] newUsers = Userscollection.availableUsers.values().toArray(new UserDTO[0]);
-        objectMapper.writeValue(new File(Constants.USERS_FILE), newUsers);
+        objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(Constants.USERS_FILE), newUsers);
         return true;
     }
 
@@ -110,7 +110,7 @@ public class PersistenceSingleton {
     public boolean updateProductFile() throws IOException {
         LOGGER.info("Guardando cambios en archivo de productos.");
         ProductEntity[] newProducts = ProductsCollection.availableProducts.values().toArray(new ProductEntity[0]);
-        objectMapper.writeValue(new File(Constants.PRODUCTS_FILE), newProducts);
+        objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(Constants.PRODUCTS_FILE), newProducts);
         return true;
     }
 
@@ -121,7 +121,7 @@ public class PersistenceSingleton {
     public boolean updatePostsFile() throws IOException {
         LOGGER.info("Guardando cambios en archivos de publicaciones.");
         PostDTO[] newPosts = PostsCollection.availablePosts.values().toArray(new PostDTO[0]);
-        objectMapper.writeValue(new File(Constants.POSTS_FILE), newPosts);
+        objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(Constants.POSTS_FILE), newPosts);
         return true;
     }
 }

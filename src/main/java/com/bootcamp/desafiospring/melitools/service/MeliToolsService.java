@@ -3,6 +3,7 @@ package com.bootcamp.desafiospring.melitools.service;
 import com.bootcamp.desafiospring.melitools.dto.PostDTO;
 import com.bootcamp.desafiospring.melitools.dto.UserDTO;
 import com.bootcamp.desafiospring.melitools.dto.response.ResponseList;
+import com.bootcamp.desafiospring.melitools.dto.response.ResponseRecentPosts;
 import com.bootcamp.desafiospring.melitools.dto.response.ResponseSimple;
 import com.bootcamp.desafiospring.melitools.dto.response.ResponseFollowersCount;
 import com.bootcamp.desafiospring.melitools.entity.UserListNode;
@@ -159,5 +160,14 @@ public class MeliToolsService {
     private boolean validateDate(Date postDate) {
         Date actualDate = new Date();
         return actualDate.before(postDate);
+    }
+
+    public ResponseRecentPosts getRecentPosts(int userId) throws UserNotFoundException {
+        LOGGER.info("Consultando las publicaciones de los vendedores seguidos por usuario con id: {}", userId);
+        PostDTO[] postsFollowed = mtRepository.searchUsersPosts(userId);
+        /*for (PostDTO post : postsFollowed) {
+            LOGGER.info(post.toString());
+        }*/
+        return new ResponseRecentPosts();
     }
 }

@@ -1,1 +1,49 @@
-[{"userId":1,"name":"Daniel","lastName":"López","followers":[2,3,4,5,6],"followed":[],"posts":[],"specialPosts":[]},{"userId":2,"name":"Julieta","lastName":"López","followers":[],"followed":[1,6],"posts":[],"specialPosts":[]},{"userId":3,"name":"Julieta","lastName":"Hernández","followers":[],"followed":[1],"posts":[],"specialPosts":[]},{"userId":4,"name":"Javier","lastName":"López","followers":[],"followed":[1],"posts":[],"specialPosts":[]},{"userId":5,"name":"Paola","lastName":"Alonso","followers":[],"followed":[1],"posts":[],"specialPosts":[]},{"userId":6,"name":"Luis","lastName":"Vilchis","followers":[2],"followed":[1],"posts":[],"specialPosts":[]}]
+[ {
+  "userId" : 1,
+  "name" : "Daniel",
+  "lastName" : "López",
+  "followers" : [ ],
+  "followed" : [ 2, 3, 4 ],
+  "posts" : [ ],
+  "specialPosts" : [ ]
+}, {
+  "userId" : 2,
+  "name" : "Julieta",
+  "lastName" : "López",
+  "followers" : [ 1 ],
+  "followed" : [ ],
+  "posts" : [ ],
+  "specialPosts" : [ ]
+}, {
+  "userId" : 3,
+  "name" : "Julieta",
+  "lastName" : "Hernández",
+  "followers" : [ 1 ],
+  "followed" : [ ],
+  "posts" : [ ],
+  "specialPosts" : [ ]
+}, {
+  "userId" : 4,
+  "name" : "Javier",
+  "lastName" : "López",
+  "followers" : [ 1 ],
+  "followed" : [ ],
+  "posts" : [ ],
+  "specialPosts" : [ ]
+}, {
+  "userId" : 5,
+  "name" : "Paola",
+  "lastName" : "Alonso",
+  "followers" : [ ],
+  "followed" : [ ],
+  "posts" : [ ],
+  "specialPosts" : [ ]
+}, {
+  "userId" : 6,
+  "name" : "Luis",
+  "lastName" : "Vilchis",
+  "followers" : [ ],
+  "followed" : [ ],
+  "posts" : [ ],
+  "specialPosts" : [ ]
+} ]

@@ -1,8 +1,8 @@
 [
   {
-    "userId": 1,
+    "userId": 2,
     "id_post": 1,
-    "date": "05-05-2021",
+    "date": "22-04-2021",
     "detail": {
       "product_id": 1,
       "productName": "Silla Gamer",
@@ -15,7 +15,7 @@
     "price": 1500.50
   },
   {
-    "userId": 1,
+    "userId": 2,
     "id_post": 2,
     "date": "05-05-2021",
     "detail": {
@@ -30,7 +30,7 @@
     "price": 1500.50
   },
   {
-    "userId": 1,
+    "userId": 2,
     "id_post": 3,
     "date": "05-05-2021",
     "detail": {
@@ -45,7 +45,7 @@
     "price": 1500.50
   },
   {
-    "userId": 1,
+    "userId": 4,
     "id_post": 4,
     "date": "05-05-2021",
     "detail": {

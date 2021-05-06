@@ -7,12 +7,18 @@ import com.bootcamp.desafiospring.melitools.exception.UserNotFoundException;
 import com.bootcamp.desafiospring.melitools.repository.collections.PostsCollection;
 import com.bootcamp.desafiospring.melitools.repository.collections.ProductsCollection;
 import com.bootcamp.desafiospring.melitools.repository.collections.Userscollection;
+import com.bootcamp.desafiospring.melitools.utils.Constants;
 import com.bootcamp.desafiospring.melitools.utils.PersistenceSingleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @Repository
 public class MeliToolsRepository {
@@ -81,4 +87,21 @@ public class MeliToolsRepository {
     }
 
     /* TODO: Crear interfaz para este repository */
+
+    public PostDTO[] searchUsersPosts(int userId) throws UserNotFoundException {
+        UserDTO user = searchUser(userId);
+        Date actualDate = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.WEEK_OF_YEAR, Constants.PERIOD_FOR_RECENT_POSTS);
+        Date lessDate = calendar.getTime();
+
+        LOGGER.info("Buscado publicaciones del periodo del {} al {}.", lessDate, actualDate);
+
+        Predicate<PostDTO> isPostOfFollowed = p -> user.getFollowed().contains(p.getUserId());
+        Predicate<PostDTO> dateIsRecent = p -> p.getDate().after(lessDate) && p.getDate().before(actualDate);
+
+        PostsCollection.availablePosts.values().stream().filter(isPostOfFollowed.and(dateIsRecent)).forEach(p -> LOGGER.info(p.toString()));
+        return null;
+    }
 }

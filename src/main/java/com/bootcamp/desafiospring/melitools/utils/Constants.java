@@ -8,6 +8,7 @@ public class Constants {
     public static final String LIST_FOLLOWERS_ENDPOINT = "/{userId}/followers/list";
     public static final String LIST_FOLLOWED_ENDPOINT = "/{userId}/followed/list";
     public static final String GENERATE_POST_ENDPOINT = "/products/newpost";
+    public static final String GET_RECENT_POSTS = "/products/list/followed/{userId}";
 
     /* Files */
     public static final String USERS_FILE = "src/main/resources/templates/UsersFile.json";
@@ -34,4 +35,7 @@ public class Constants {
 
     /* Others */
     public static final String ERROR_PARSE_EXCEPTION = "HttpMessageNotReadableException";
+
+    /* Numbers */
+    public static final int PERIOD_FOR_RECENT_POSTS = -2;
 }
