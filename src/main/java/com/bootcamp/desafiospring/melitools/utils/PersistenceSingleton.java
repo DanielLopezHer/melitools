@@ -2,6 +2,7 @@ package com.bootcamp.desafiospring.melitools.utils;
 
 import com.bootcamp.desafiospring.melitools.dto.PostDTO;
 import com.bootcamp.desafiospring.melitools.dto.UserDTO;
+import com.bootcamp.desafiospring.melitools.entity.ProductEntity;
 import com.bootcamp.desafiospring.melitools.repository.collections.PostsCollection;
 import com.bootcamp.desafiospring.melitools.repository.collections.ProductsCollection;
 import com.bootcamp.desafiospring.melitools.repository.collections.Userscollection;
@@ -21,6 +22,7 @@ public class PersistenceSingleton {
     private PersistenceSingleton() throws IOException {
         loadUsers();
         loadPosts();
+        loadProducts();
     }
 
     /**
@@ -82,10 +84,23 @@ public class PersistenceSingleton {
      * @author Daniel Alejandro López Hernández
      * @throws IOException if the file was not found.*/
     private void loadPosts() throws IOException{
+        /*TODO: Investigar como indicarle a jackson el formato con el que se recibirá la fecha */
         PostDTO[] readedPosts = objectMapper.readValue(new File(Constants.POSTS_FILE), PostDTO[].class);
         for (PostDTO post : readedPosts) {
             PostsCollection.availablePosts.put(post.getId_post(), post);
         }
         printMap("de posts generado:", 2);
+    }
+
+    /**
+     * Reads and loads in memory the content of the ProductsFile
+     * @author Daniel Alejandro López Hernández
+     * @throws IOException if the file was not found.*/
+    private void loadProducts() throws IOException{
+        ProductEntity[] readedProducts = objectMapper.readValue(new File(Constants.PRODUCTS_FILE), ProductEntity[].class);
+        for (ProductEntity product : readedProducts) {
+            ProductsCollection.availableProducts.put(product.getProduct_id(), product);
+        }
+        printMap("de products generado:", 3);
     }
 }

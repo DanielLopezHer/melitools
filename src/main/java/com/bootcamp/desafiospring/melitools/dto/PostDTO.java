@@ -1,12 +1,15 @@
 package com.bootcamp.desafiospring.melitools.dto;
 
 import com.bootcamp.desafiospring.melitools.entity.ProductEntity;
+import com.bootcamp.desafiospring.melitools.utils.Constants;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
 public class PostDTO {
     private int userId;
     private int id_post;
+    @JsonFormat(pattern = Constants.DATE_FORMAT)
     private Date date;
     private ProductEntity detail;
     private int category;

@@ -1,0 +1,42 @@
+[
+  {
+    "product_id": 1,
+    "productName": "Silla Gamer",
+    "type": "Gamer",
+    "brand": "Razer",
+    "color": "Red & Black",
+    "notes": "Special edition."
+  },
+  {
+    "product_id": 2,
+    "productName": "Teclado Gamer",
+    "type": "Gamer",
+    "brand": "Razer",
+    "color": "Red & Black",
+    "notes": "Special edition."
+  },
+  {
+    "product_id": 3,
+    "productName": "Mouse Gamer",
+    "type": "Gamer",
+    "brand": "Razer",
+    "color": "Red & Black",
+    "notes": "Special edition."
+  },
+  {
+    "product_id": 4,
+    "productName": "Monitor Gamer",
+    "type": "Gamer",
+    "brand": "Razer",
+    "color": "Red & Black",
+    "notes": "Special edition."
+  },
+  {
+    "product_id": 5,
+    "productName": "Laptop Gamer",
+    "type": "Gamer",
+    "brand": "Razer",
+    "color": "Red & Black",
+    "notes": "Special edition."
+  }
+]
