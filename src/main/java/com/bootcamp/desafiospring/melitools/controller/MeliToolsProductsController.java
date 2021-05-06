@@ -2,7 +2,6 @@ package com.bootcamp.desafiospring.melitools.controller;
 
 import com.bootcamp.desafiospring.melitools.dto.PostDTO;
 import com.bootcamp.desafiospring.melitools.dto.response.BaseResponse;
-import com.bootcamp.desafiospring.melitools.dto.response.ResponseRecentPosts;
 import com.bootcamp.desafiospring.melitools.dto.response.ResponseSimple;
 import com.bootcamp.desafiospring.melitools.exception.DateNotValidException;
 import com.bootcamp.desafiospring.melitools.exception.PostIdAlreadyAssignedException;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
-@RestController(Constants.BASE_URL_PRODUCTS)
+@RestController()
 public class MeliToolsProductsController {
     @Autowired
     private MeliToolsService mtService;
@@ -37,8 +36,8 @@ public class MeliToolsProductsController {
      * Resturs the list of the recent posts of the followed users of the user with id userId.
      * @author Daniel Alejandro López Hernández.*/
     @GetMapping(Constants.GET_RECENT_POSTS)
-    public BaseResponse getRecentPosts(@PathVariable int userId) throws UserNotFoundException {
+    public BaseResponse getRecentPosts(@PathVariable int userId, @RequestParam String order) throws UserNotFoundException {
         LOGGER.info("Llamado al endpoint * Recent Posts *");
-        return mtService.getRecentPosts(userId);
+        return mtService.getRecentPosts(userId, order);
     }
 }

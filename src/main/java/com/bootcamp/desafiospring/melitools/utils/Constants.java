@@ -8,8 +8,8 @@ public class Constants {
     public static final String FOLLOWERS_COUNT_ENDPOINT = "/{userId}/followers/count";
     public static final String LIST_FOLLOWERS_ENDPOINT = "/{userId}/followers/list";
     public static final String LIST_FOLLOWED_ENDPOINT = "/{userId}/followed/list";
-    public static final String GENERATE_POST_ENDPOINT = "/newpost";
-    public static final String GET_RECENT_POSTS = "/list/followed/{userId}";
+    public static final String GENERATE_POST_ENDPOINT = "/products/newpost";
+    public static final String GET_RECENT_POSTS = "/products/list/followed/{userId}";
     public static final String UNFOLLOW_ENDPOINT = "/{userId}/unfollow/{userIdToUnFollow}";
 
     /* Files */

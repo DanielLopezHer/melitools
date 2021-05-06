@@ -173,9 +173,10 @@ public class MeliToolsService {
      * @param userId {int} id of the user
      * @return {ResponseRecentPosts} response with the list of the posts.
      * @throws UserNotFoundException if the id of the user doesn't exists.*/
-    public ResponseRecentPosts getRecentPosts(int userId) throws UserNotFoundException {
+    public ResponseRecentPosts getRecentPosts(int userId, String order) throws UserNotFoundException {
         LOGGER.info("Consultando las publicaciones de los vendedores seguidos por usuario con id: {}", userId);
         List<PostDTO> postsFollowed = mtRepository.searchUsersRecentPosts(userId);
+        postsFollowed = Utils.postsSorter(postsFollowed, order);
         return new ResponseRecentPosts(userId, mtRepository.searchUser(userId).getName(), postsFollowed.toArray(new PostDTO[0]));
     }
 

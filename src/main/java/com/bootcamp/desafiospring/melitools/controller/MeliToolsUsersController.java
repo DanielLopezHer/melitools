@@ -9,7 +9,6 @@ import com.bootcamp.desafiospring.melitools.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -51,6 +50,7 @@ public class MeliToolsUsersController {
         return mtService.listFollowers(userId, order);
     }
 
+    /*TODO: Investigar como manejar el requestParam por si no viene específicado*/
     /**
      * Returns the list of followed sellers of a user.
      * @author Daniel Alejandro López Hernández.*/

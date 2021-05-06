@@ -2,7 +2,7 @@
   "userId" : 1,
   "name" : "Daniel",
   "lastName" : "López",
-  "followers" : [ ],
+  "followers" : [ 2 ],
   "followed" : [ 2, 3, 4 ],
   "posts" : [ ],
   "specialPosts" : [ ]
@@ -11,7 +11,7 @@
   "name" : "Carlos",
   "lastName" : "López",
   "followers" : [ 1 ],
-  "followed" : [ ],
+  "followed" : [ 1 ],
   "posts" : [ ],
   "specialPosts" : [ ]
 }, {
