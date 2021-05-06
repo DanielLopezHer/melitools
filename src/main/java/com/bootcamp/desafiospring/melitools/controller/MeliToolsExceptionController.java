@@ -34,8 +34,6 @@ public class MeliToolsExceptionController {
         return new ResponseEntity<>(ex.getErrorDTO(), HttpStatus.BAD_REQUEST);
     }
 
-    /*TODO: Documentar controller de exceptions*/
-
     @ExceptionHandler(PostIdAlreadyAssignedException.class)
     public ResponseEntity<ResponseErrorDTO> PostIdAlreadyAssignedException(PostIdAlreadyAssignedException ex){
         LOGGER.info("El id de la publicacion ya esta en uso.");

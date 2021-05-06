@@ -9,6 +9,7 @@ import com.bootcamp.desafiospring.melitools.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -45,18 +46,18 @@ public class MeliToolsUsersController {
      * Returns the list of followers of a user.
      * @author Daniel Alejandro López Hernández.*/
     @GetMapping(Constants.LIST_FOLLOWERS_ENDPOINT)
-    public BaseResponse listFollowers(@PathVariable int userId) throws UserNotFoundException {
+    public BaseResponse listFollowers(@PathVariable int userId, @RequestParam String order) throws UserNotFoundException {
         LOGGER.info("Llamado al endpoint * List followers *");
-        return mtService.listFollowers(userId);
+        return mtService.listFollowers(userId, order);
     }
 
     /**
      * Returns the list of followed sellers of a user.
      * @author Daniel Alejandro López Hernández.*/
     @GetMapping(Constants.LIST_FOLLOWED_ENDPOINT)
-    public BaseResponse listFollowed(@PathVariable int userId) throws UserNotFoundException {
+    public BaseResponse listFollowed(@PathVariable int userId, @RequestParam String order) throws UserNotFoundException {
         LOGGER.info("Llamado al endpoint * List followed *");
-        return mtService.listFollowed(userId);
+        return mtService.listFollowed(userId, order);
     }
 
     /**

@@ -70,6 +70,7 @@ public class MeliToolsService {
      * @param userId {int} id of the user
      * @return {ResponseFollowersCount} response with the number of followers of the user with id "userId".
      * @author Daniel Alejandro López Hernández
+     * @throws UserNotFoundException if the user is not found.
      */
     public ResponseFollowersCount countFollowers(int userId) throws UserNotFoundException {
         UserDTO user = mtRepository.searchUser(userId);
@@ -85,8 +86,9 @@ public class MeliToolsService {
      * @param userId {int} id of the user
      * @return {ResponseList} response with the list of users
      * @author Daniel Alejandro López Hernández
+     * @throws UserNotFoundException if the user is not found.
      */
-    public ResponseList listFollowers(int userId) throws UserNotFoundException {
+    public ResponseList listFollowers(int userId, String order) throws UserNotFoundException {
         UserDTO user = mtRepository.searchUser(userId);
         UserListNode[] followersInfo = new UserListNode[user.getFollowers().size()];
         int index = 0;
@@ -95,6 +97,7 @@ public class MeliToolsService {
             followersInfo[index] = node;
             index++;
         }
+        followersInfo = Utils.sorter(Arrays.asList(followersInfo.clone()), order).toArray(new UserListNode[0]);
         LOGGER.info("El array de seguidores es: {}", Arrays.toString(followersInfo));
         return new ResponseList(userId, user.getName(), followersInfo);
     }
@@ -105,8 +108,9 @@ public class MeliToolsService {
      * @param userId {int} id of the user
      * @return {ResponseList} response with the list of sellers
      * @author Daniel Alejandro López Hernández
+     * @throws UserNotFoundException if the user is not found.
      */
-    public ResponseList listFollowed(int userId) throws UserNotFoundException {
+    public ResponseList listFollowed(int userId, String order) throws UserNotFoundException {
         UserDTO user = mtRepository.searchUser(userId);
         UserListNode[] followedInfo = new UserListNode[user.getFollowed().size()];
         int index = 0;
@@ -115,6 +119,7 @@ public class MeliToolsService {
             followedInfo[index] = node;
             index++;
         }
+        followedInfo = Utils.sorter(Arrays.asList(followedInfo.clone()), order).toArray(new UserListNode[0]);
         LOGGER.info("El array de vendedores seguidos es: {}", Arrays.toString(followedInfo));
         return new ResponseList(userId, user.getName(), followedInfo);
     }

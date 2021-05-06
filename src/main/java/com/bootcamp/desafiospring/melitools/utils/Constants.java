@@ -34,7 +34,6 @@ public class Constants {
     public static final String DATE_FORMAT = "dd-MM-yyyy";
 
     /* Time zone */
-    /*TODO: revisar que cosas se pueden setear por properties */
     public static final String TIME_ZONE = "America/Mexico_City";
 
     /* Others */
@@ -42,4 +41,8 @@ public class Constants {
 
     /* Numbers */
     public static final int PERIOD_FOR_RECENT_POSTS = -2;
+
+    /* Orders */
+    public static final String ORDER_METHOD_NAME_ASC = "name_asc";
+    public static final String ORDER_METHOD_DATE_ASC = "date_asc";
 }
