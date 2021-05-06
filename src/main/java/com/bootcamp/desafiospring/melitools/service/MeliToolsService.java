@@ -124,7 +124,6 @@ public class MeliToolsService implements MeliToolsServiceInterface{
         return new ResponseList(userId, user.getName(), followedInfo);
     }
 
-    /*TODO: Refactorizar este método*/
     /**
      * Method that performs the registration of a publication and stores the information in the database.
      * @author Daniel Alejandro López Hernández
