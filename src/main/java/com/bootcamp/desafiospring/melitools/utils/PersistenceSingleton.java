@@ -84,7 +84,6 @@ public class PersistenceSingleton {
      * @author Daniel Alejandro López Hernández
      * @throws IOException if the file was not found.*/
     private void loadPosts() throws IOException{
-        /*TODO: Investigar como indicarle a jackson el formato con el que se recibirá la fecha */
         PostDTO[] readedPosts = objectMapper.readValue(new File(Constants.POSTS_FILE), PostDTO[].class);
         for (PostDTO post : readedPosts) {
             PostsCollection.availablePosts.put(post.getId_post(), post);

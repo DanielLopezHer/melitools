@@ -2,7 +2,7 @@
   {
     "userId": 1,
     "id_post": 1,
-    "date": "05-01-2021",
+    "date": "05-05-2021",
     "detail": {
       "product_id": 1,
       "productName": "Silla Gamer",
@@ -17,7 +17,7 @@
   {
     "userId": 1,
     "id_post": 2,
-    "date": "05-01-2021",
+    "date": "05-05-2021",
     "detail": {
       "product_id": 2,
       "productName": "Teclado Gamer",
@@ -32,7 +32,7 @@
   {
     "userId": 1,
     "id_post": 3,
-    "date": "05-01-2021",
+    "date": "05-05-2021",
     "detail": {
       "product_id": 3,
       "productName": "Mouse Gamer",
@@ -47,7 +47,7 @@
   {
     "userId": 1,
     "id_post": 4,
-    "date": "05-01-2021",
+    "date": "05-05-2021",
     "detail": {
       "product_id": 4,
       "productName": "Monitor Gamer",
@@ -62,7 +62,7 @@
   {
     "userId": 1,
     "id_post": 5,
-    "date": "05-01-2021",
+    "date": "05-05-2021",
     "detail": {
       "product_id": 5,
       "productName": "Laptop Gamer",

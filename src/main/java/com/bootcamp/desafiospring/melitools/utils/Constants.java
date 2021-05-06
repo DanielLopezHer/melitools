@@ -21,5 +21,8 @@ public class Constants {
     public static final String USER_ALREADY_FOLLOWED = "El usuario %d ya está siendo seguido por el usuario %d.";
 
     /* Patterns */
-    public static final String DATE_FORMAT = "DD-MM-YYYY";
+    public static final String DATE_FORMAT = "dd-MM-yyyy";
+
+    /* Time zone */
+    public static final String TIME_ZONE = "America/Mexico_City";
 }

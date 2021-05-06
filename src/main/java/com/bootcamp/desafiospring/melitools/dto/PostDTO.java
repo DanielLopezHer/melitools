@@ -9,7 +9,7 @@ import java.util.Date;
 public class PostDTO {
     private int userId;
     private int id_post;
-    @JsonFormat(pattern = Constants.DATE_FORMAT)
+    @JsonFormat(pattern = Constants.DATE_FORMAT, timezone = Constants.TIME_ZONE)
     private Date date;
     private ProductEntity detail;
     private int category;
