@@ -1,6 +1,5 @@
 package com.bootcamp.desafiospring.melitools.controller;
 
-import com.bootcamp.desafiospring.melitools.dto.PostDTO;
 import com.bootcamp.desafiospring.melitools.dto.response.BaseResponse;
 import com.bootcamp.desafiospring.melitools.dto.response.ResponseSimple;
 import com.bootcamp.desafiospring.melitools.exception.UserAlreadyFollowedException;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
-@RestController(Constants.BASE_URL)
+@RestController(Constants.BASE_URL_USERS)
 public class MeliToolsUsersController {
 
     @Autowired
@@ -58,5 +57,15 @@ public class MeliToolsUsersController {
     public BaseResponse listFollowed(@PathVariable int userId) throws UserNotFoundException {
         LOGGER.info("Llamado al endpoint * List followed *");
         return mtService.listFollowed(userId);
+    }
+
+    /**
+     * Performs "Unfollow" action
+     * @author Daniel Alejandro López Hernández
+     * */
+    @PostMapping(Constants.UNFOLLOW_ENDPOINT)
+    public ResponseSimple unFollowUser(@PathVariable int userId, @PathVariable int userIdToUnFollow) throws IOException, UserNotFoundException {
+        LOGGER.info("Llamado al endpoint * Unfollow *");
+        return mtService.unFollowUser(userId, userIdToUnFollow);
     }
 }

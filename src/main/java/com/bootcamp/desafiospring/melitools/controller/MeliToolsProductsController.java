@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
-@RestController
+@RestController(Constants.BASE_URL_PRODUCTS)
 public class MeliToolsProductsController {
     @Autowired
     private MeliToolsService mtService;

@@ -32,10 +32,9 @@ public class MeliToolsService {
 
     /**
      * Method to follow a user
-     *
      * @param userId         {int} id of the user who wants to follow other user.
      * @param userIdToFollow {int} id of the user who is going to be followed.
-     * @return {Response} response with HttpStatus and message.
+     * @return {ResponseSimple} response with HttpStatus and message.
      * @throws IOException           if the singleto doesn't find the users file.
      * @throws UserNotFoundException if the user with one of the received ids doesn't exists.
      * @author Daniel Alejandro López Hernández
@@ -173,5 +172,32 @@ public class MeliToolsService {
         LOGGER.info("Consultando las publicaciones de los vendedores seguidos por usuario con id: {}", userId);
         List<PostDTO> postsFollowed = mtRepository.searchUsersRecentPosts(userId);
         return new ResponseRecentPosts(userId, mtRepository.searchUser(userId).getName(), postsFollowed.toArray(new PostDTO[0]));
+    }
+
+    /**
+     * Method to unfollow a user
+     * @param userId         {int} id of the user who wants to follow other user.
+     * @param userIdToUnFollow {int} id of the user who is going to be unfollowed.
+     * @return {ResponseSimple} response with HttpStatus and message.
+     * @throws IOException           if the singleto doesn't find the users file.
+     * @throws UserNotFoundException if the user with one of the received ids doesn't exists.
+     * @author Daniel Alejandro López Hernández
+     */
+    public ResponseSimple unFollowUser(int userId, int userIdToUnFollow) throws IOException, UserNotFoundException {
+        LOGGER.info("Inicio de accion unFollow.");
+
+        UserDTO follower = mtRepository.searchUser(userId);
+        UserDTO followed = mtRepository.searchUser(userIdToUnFollow);
+
+        if(!Utils.searchIdInList(follower.getFollowed(), userIdToUnFollow)){
+            follower.getFollowed().remove(Integer.valueOf(userIdToUnFollow));
+        }
+        if(!Utils.searchIdInList(followed.getFollowers(), userId)){
+            followed.getFollowers().remove(Integer.valueOf(userId));
+        }
+        if (mtRepository.updateUsers())
+            return new ResponseSimple(Constants.USER_UNFOLLOWED, HttpStatus.OK);
+        else
+            return new ResponseSimple(Constants.ERROR_USER_FOLLOWED, HttpStatus.BAD_REQUEST);
     }
 }

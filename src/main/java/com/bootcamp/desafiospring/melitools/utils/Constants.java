@@ -2,13 +2,15 @@ package com.bootcamp.desafiospring.melitools.utils;
 
 public class Constants {
     /* Endpoints */
-    public static final String BASE_URL = "/users";
+    public static final String BASE_URL_USERS = "/users";
+    public static final String BASE_URL_PRODUCTS = "/products";
     public static final String FOLLOW_ENDPOINT = "/{userId}/follow/{userIdToFollow}";
     public static final String FOLLOWERS_COUNT_ENDPOINT = "/{userId}/followers/count";
     public static final String LIST_FOLLOWERS_ENDPOINT = "/{userId}/followers/list";
     public static final String LIST_FOLLOWED_ENDPOINT = "/{userId}/followed/list";
-    public static final String GENERATE_POST_ENDPOINT = "/products/newpost";
-    public static final String GET_RECENT_POSTS = "/products/list/followed/{userId}";
+    public static final String GENERATE_POST_ENDPOINT = "/newpost";
+    public static final String GET_RECENT_POSTS = "/list/followed/{userId}";
+    public static final String UNFOLLOW_ENDPOINT = "/{userId}/unfollow/{userIdToUnFollow}";
 
     /* Files */
     public static final String USERS_FILE = "src/main/resources/templates/UsersFile.json";
@@ -25,6 +27,8 @@ public class Constants {
     public static final String DATE_NOT_VALID = "La fecha de la publicación debe ser superior a la actual.";
     public static final String POST_GENERATED = "!El post fue creado con éxito!";
     public static final String MESSAGE_ERROR_PARSING = "Por favor, verifica el contenido de tu petición.";
+
+    public static final String USER_UNFOLLOWED = "Se dejó de seguir al usuario correctamente.";
 
     /* Patterns */
     public static final String DATE_FORMAT = "dd-MM-yyyy";
