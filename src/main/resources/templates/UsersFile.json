@@ -8,7 +8,7 @@
   "specialPosts" : [ ]
 }, {
   "userId" : 2,
-  "name" : "Julieta",
+  "name" : "Carlos",
   "lastName" : "López",
   "followers" : [ 1 ],
   "followed" : [ ],
@@ -16,7 +16,7 @@
   "specialPosts" : [ ]
 }, {
   "userId" : 3,
-  "name" : "Julieta",
+  "name" : "Alejandra",
   "lastName" : "Hernández",
   "followers" : [ 1 ],
   "followed" : [ ],
@@ -24,7 +24,7 @@
   "specialPosts" : [ ]
 }, {
   "userId" : 4,
-  "name" : "Javier",
+  "name" : "Bryan",
   "lastName" : "López",
   "followers" : [ 1 ],
   "followed" : [ ],
