@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class MeliToolsService {
+public class MeliToolsService implements MeliToolsServiceInterface{
 
     @Autowired
     private MeliToolsRepository mtRepository;
