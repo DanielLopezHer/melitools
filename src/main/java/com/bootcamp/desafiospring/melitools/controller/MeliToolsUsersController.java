@@ -45,17 +45,18 @@ public class MeliToolsUsersController {
      * Returns the list of followers of a user.
      * @author Daniel Alejandro López Hernández.*/
     @GetMapping(Constants.LIST_FOLLOWERS_ENDPOINT)
-    public BaseResponse listFollowers(@PathVariable int userId, @RequestParam String order) throws UserNotFoundException {
+    public BaseResponse listFollowers(@PathVariable int userId, @RequestParam(defaultValue = Constants.ORDER_METHOD_NAME_ASC)
+            String order) throws UserNotFoundException {
         LOGGER.info("Llamado al endpoint * List followers *");
         return mtService.listFollowers(userId, order);
     }
 
-    /*TODO: Investigar como manejar el requestParam por si no viene específicado*/
     /**
      * Returns the list of followed sellers of a user.
      * @author Daniel Alejandro López Hernández.*/
     @GetMapping(Constants.LIST_FOLLOWED_ENDPOINT)
-    public BaseResponse listFollowed(@PathVariable int userId, @RequestParam String order) throws UserNotFoundException {
+    public BaseResponse listFollowed(@PathVariable int userId, @RequestParam(defaultValue = Constants.ORDER_METHOD_NAME_ASC)
+            String order) throws UserNotFoundException {
         LOGGER.info("Llamado al endpoint * List followed *");
         return mtService.listFollowed(userId, order);
     }
