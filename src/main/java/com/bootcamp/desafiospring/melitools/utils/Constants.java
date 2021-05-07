@@ -29,6 +29,7 @@ public class Constants {
     public static final String MESSAGE_ERROR_PARSING = "Por favor, verifica el contenido de tu petición.";
 
     public static final String USER_UNFOLLOWED = "Se dejó de seguir al usuario correctamente.";
+    public static final String MESSAGE_PATH_VARIABLE_ERROR = "Request incorrecto, favor de revisar su URL.";
 
     /* Patterns */
     public static final String DATE_FORMAT = "dd-MM-yyyy";
@@ -38,6 +39,7 @@ public class Constants {
 
     /* Others */
     public static final String ERROR_PARSE_EXCEPTION = "HttpMessageNotReadableException";
+    public static final String ERROR_PATH_VARIABLE_EXCEPTION = "MethodArgumentTypeMismatchException";
 
     /* Numbers */
     public static final int PERIOD_FOR_RECENT_POSTS = -2;

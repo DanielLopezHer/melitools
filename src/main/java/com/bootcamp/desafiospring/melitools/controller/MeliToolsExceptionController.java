@@ -58,4 +58,11 @@ public class MeliToolsExceptionController {
         return new ResponseEntity<>(new ResponseErrorDTO(Constants.ERROR_PARSE_EXCEPTION, Constants.MESSAGE_ERROR_PARSING),
                 HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(org.springframework.web.method.annotation.MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ResponseErrorDTO> MethodArgumentTypeMismatchException(){
+        LOGGER.info("Se recibio un pathvariable incorrecto.");
+        return new ResponseEntity<>(new ResponseErrorDTO(Constants.ERROR_PATH_VARIABLE_EXCEPTION, Constants.MESSAGE_PATH_VARIABLE_ERROR),
+                HttpStatus.BAD_REQUEST);
+    }
 }
