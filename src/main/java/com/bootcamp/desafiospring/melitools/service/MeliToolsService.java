@@ -36,7 +36,7 @@ public class MeliToolsService implements MeliToolsServiceInterface{
      * @throws UserNotFoundException if the user with one of the received ids doesn't exists.
      * @author Daniel Alejandro López Hernández
      */
-    public ResponseSimple followUser(int userId, int userIdToFollow) throws IOException, UserNotFoundException,
+    public ResponseSimpleDTO followUser(int userId, int userIdToFollow) throws IOException, UserNotFoundException,
             UserAlreadyFollowedException {
         LOGGER.info("Inicio de accion Follow.");
 
@@ -56,9 +56,9 @@ public class MeliToolsService implements MeliToolsServiceInterface{
             throw new UserAlreadyFollowedException(followed.getUserId(), follower.getUserId());
 
         if (mtRepository.updateUsers())
-            return new ResponseSimple(Constants.USER_FOLLOWED, HttpStatus.OK);
+            return new ResponseSimpleDTO(Constants.USER_FOLLOWED, HttpStatus.OK);
         else
-            return new ResponseSimple(Constants.ERROR_USER_FOLLOWED, HttpStatus.BAD_REQUEST);
+            return new ResponseSimpleDTO(Constants.ERROR_USER_FOLLOWED, HttpStatus.BAD_REQUEST);
     }
 
     /**
@@ -69,9 +69,9 @@ public class MeliToolsService implements MeliToolsServiceInterface{
      * @author Daniel Alejandro López Hernández
      * @throws UserNotFoundException if the user is not found.
      */
-    public ResponseFollowersCount countFollowers(int userId) throws UserNotFoundException {
+    public ResponseFollowersCountDTO countFollowers(int userId) throws UserNotFoundException {
         UserDTO user = mtRepository.searchUser(userId);
-        ResponseFollowersCount response = new ResponseFollowersCount(user.getUserId(), user.getName(),
+        ResponseFollowersCountDTO response = new ResponseFollowersCountDTO(user.getUserId(), user.getName(),
                 user.getFollowers().size());
         LOGGER.info("Response generado: {}", response.toString());
         return response;
@@ -85,7 +85,7 @@ public class MeliToolsService implements MeliToolsServiceInterface{
      * @author Daniel Alejandro López Hernández
      * @throws UserNotFoundException if the user is not found.
      */
-    public ResponseListFollower listFollowers(int userId, String order) throws UserNotFoundException {
+    public ResponseListFollowerDTO listFollowers(int userId, String order) throws UserNotFoundException {
         UserDTO user = mtRepository.searchUser(userId);
         UserListNode[] followersInfo = new UserListNode[user.getFollowers().size()];
         int index = 0;
@@ -96,7 +96,7 @@ public class MeliToolsService implements MeliToolsServiceInterface{
         }
         followersInfo = Utils.sorter(Arrays.asList(followersInfo.clone()), order).toArray(new UserListNode[0]);
         LOGGER.info("El array de seguidores es: {}", Arrays.toString(followersInfo));
-        return new ResponseListFollower(userId, user.getName(), followersInfo);
+        return new ResponseListFollowerDTO(userId, user.getName(), followersInfo);
     }
 
     /**
@@ -107,7 +107,7 @@ public class MeliToolsService implements MeliToolsServiceInterface{
      * @author Daniel Alejandro López Hernández
      * @throws UserNotFoundException if the user is not found.
      */
-    public ResponseListFollowed listFollowed(int userId, String order) throws UserNotFoundException {
+    public ResponseListFollowedDTO listFollowed(int userId, String order) throws UserNotFoundException {
         UserDTO user = mtRepository.searchUser(userId);
         UserListNode[] followedInfo = new UserListNode[user.getFollowed().size()];
         int index = 0;
@@ -118,7 +118,7 @@ public class MeliToolsService implements MeliToolsServiceInterface{
         }
         followedInfo = Utils.sorter(Arrays.asList(followedInfo.clone()), order).toArray(new UserListNode[0]);
         LOGGER.info("El array de vendedores seguidos es: {}", Arrays.toString(followedInfo));
-        return new ResponseListFollowed(userId, user.getName(), followedInfo);
+        return new ResponseListFollowedDTO(userId, user.getName(), followedInfo);
     }
 
     /**
@@ -130,7 +130,7 @@ public class MeliToolsService implements MeliToolsServiceInterface{
      * @throws PostIdAlreadyAssignedException If there is already a publication with the indicated id.
      * @throws DateNotValidException If the date does not meet the required characteristics.
      * @throws IOException If there is a problem updating the archive files.*/
-    public ResponseSimple generatePost(PostDTO request) throws UserNotFoundException, PostIdAlreadyAssignedException,
+    public ResponseSimpleDTO generatePost(PostDTO request) throws UserNotFoundException, PostIdAlreadyAssignedException,
             DateNotValidException, IOException {
         UserDTO user = mtRepository.searchUser(request.getUserId());
         Date datePost = request.getDate();
@@ -150,7 +150,7 @@ public class MeliToolsService implements MeliToolsServiceInterface{
                 throw new DateNotValidException(Constants.DATE_NOT_VALID, HttpStatus.BAD_REQUEST);
         } else
             throw new PostIdAlreadyAssignedException(Constants.POST_ID_ASSIGNED, HttpStatus.BAD_REQUEST);
-        return new ResponseSimple(Constants.POST_GENERATED, HttpStatus.OK);
+        return new ResponseSimpleDTO(Constants.POST_GENERATED, HttpStatus.OK);
     }
 
     /**
@@ -169,11 +169,11 @@ public class MeliToolsService implements MeliToolsServiceInterface{
      * @param userId {int} id of the user
      * @return {ResponseRecentPosts} response with the list of the posts.
      * @throws UserNotFoundException if the id of the user doesn't exists.*/
-    public ResponseRecentPosts getRecentPosts(int userId, String order) throws UserNotFoundException {
+    public ResponseRecentPostsDTO getRecentPosts(int userId, String order) throws UserNotFoundException {
         LOGGER.info("Consultando las publicaciones de los vendedores seguidos por usuario con id: {}", userId);
         List<PostDTO> postsFollowed = mtRepository.searchUsersRecentPosts(userId);
         postsFollowed = Utils.postsSorter(postsFollowed, order);
-        return new ResponseRecentPosts(userId, mtRepository.searchUser(userId).getName(), postsFollowed.toArray(new PostDTO[0]));
+        return new ResponseRecentPostsDTO(userId, mtRepository.searchUser(userId).getName(), postsFollowed.toArray(new PostDTO[0]));
     }
 
     /**
@@ -185,7 +185,7 @@ public class MeliToolsService implements MeliToolsServiceInterface{
      * @throws UserNotFoundException if the user with one of the received ids doesn't exists.
      * @author Daniel Alejandro López Hernández
      */
-    public ResponseSimple unFollowUser(int userId, int userIdToUnFollow) throws IOException, UserNotFoundException {
+    public ResponseSimpleDTO unFollowUser(int userId, int userIdToUnFollow) throws IOException, UserNotFoundException {
         LOGGER.info("Inicio de accion unFollow.");
 
         UserDTO follower = mtRepository.searchUser(userId);
@@ -198,8 +198,8 @@ public class MeliToolsService implements MeliToolsServiceInterface{
             followed.getFollowers().remove(Integer.valueOf(userId));
         }
         if (mtRepository.updateUsers())
-            return new ResponseSimple(Constants.USER_UNFOLLOWED, HttpStatus.OK);
+            return new ResponseSimpleDTO(Constants.USER_UNFOLLOWED, HttpStatus.OK);
         else
-            return new ResponseSimple(Constants.ERROR_USER_FOLLOWED, HttpStatus.BAD_REQUEST);
+            return new ResponseSimpleDTO(Constants.ERROR_USER_FOLLOWED, HttpStatus.BAD_REQUEST);
     }
 }

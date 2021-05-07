@@ -4,10 +4,10 @@ import com.bootcamp.desafiospring.melitools.entity.UserListNode;
 
 import java.util.Arrays;
 
-public class ResponseListFollower extends BaseResponse{
+public class ResponseListFollowerDTO extends BaseResponseDTO {
     private UserListNode[] followers;
 
-    public ResponseListFollower(int userId, String userName, UserListNode[] users) {
+    public ResponseListFollowerDTO(int userId, String userName, UserListNode[] users) {
         super(userId, userName);
         this.followers = users;
     }

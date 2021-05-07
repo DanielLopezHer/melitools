@@ -1,12 +1,12 @@
 package com.bootcamp.desafiospring.melitools.dto.response;
 
-public class BaseResponse {
+public class BaseResponseDTO {
     private int userId;
     private String userName;
 
-    public BaseResponse() { }
+    public BaseResponseDTO() { }
 
-    public BaseResponse(int userId, String userName) {
+    public BaseResponseDTO(int userId, String userName) {
         this.userId = userId;
         this.userName = userName;
     }

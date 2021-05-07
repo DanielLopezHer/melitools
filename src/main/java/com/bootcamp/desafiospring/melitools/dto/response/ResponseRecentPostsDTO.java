@@ -4,12 +4,12 @@ import com.bootcamp.desafiospring.melitools.dto.PostDTO;
 
 import java.util.Arrays;
 
-public class ResponseRecentPosts extends BaseResponse{
+public class ResponseRecentPostsDTO extends BaseResponseDTO {
     private PostDTO[] recentPosts;
 
-    public ResponseRecentPosts() { }
+    public ResponseRecentPostsDTO() { }
 
-    public ResponseRecentPosts(int userId, String userName, PostDTO[] recentPosts) {
+    public ResponseRecentPostsDTO(int userId, String userName, PostDTO[] recentPosts) {
         super(userId, userName);
         this.recentPosts = recentPosts;
     }

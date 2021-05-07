@@ -1,7 +1,7 @@
 package com.bootcamp.desafiospring.melitools.controller;
 
-import com.bootcamp.desafiospring.melitools.dto.response.BaseResponse;
-import com.bootcamp.desafiospring.melitools.dto.response.ResponseSimple;
+import com.bootcamp.desafiospring.melitools.dto.response.BaseResponseDTO;
+import com.bootcamp.desafiospring.melitools.dto.response.ResponseSimpleDTO;
 import com.bootcamp.desafiospring.melitools.exception.UserAlreadyFollowedException;
 import com.bootcamp.desafiospring.melitools.exception.UserNotFoundException;
 import com.bootcamp.desafiospring.melitools.service.MeliToolsService;
@@ -26,7 +26,7 @@ public class MeliToolsUsersController {
      * @author Daniel Alejandro López Hernández
      * */
     @PostMapping(Constants.FOLLOW_ENDPOINT)
-    public ResponseSimple followUser(@PathVariable int userId, @PathVariable int userIdToFollow) throws IOException, UserNotFoundException,
+    public ResponseSimpleDTO followUser(@PathVariable int userId, @PathVariable int userIdToFollow) throws IOException, UserNotFoundException,
             UserAlreadyFollowedException {
         LOGGER.info("Llamado al endpoint * Follow *");
         return mtService.followUser(userId, userIdToFollow);
@@ -36,7 +36,7 @@ public class MeliToolsUsersController {
      * Returns the number of followers of a user.
      * @author Daniel Alejandro López Hernández*/
     @GetMapping(Constants.FOLLOWERS_COUNT_ENDPOINT)
-    public BaseResponse followersCount(@PathVariable int userId) throws UserNotFoundException {
+    public BaseResponseDTO followersCount(@PathVariable int userId) throws UserNotFoundException {
         LOGGER.info("Llamado al endpoint * Count followers *");
         return mtService.countFollowers(userId);
     }
@@ -45,7 +45,7 @@ public class MeliToolsUsersController {
      * Returns the list of followers of a user.
      * @author Daniel Alejandro López Hernández.*/
     @GetMapping(Constants.LIST_FOLLOWERS_ENDPOINT)
-    public BaseResponse listFollowers(@PathVariable int userId, @RequestParam(defaultValue = Constants.ORDER_METHOD_NAME_ASC)
+    public BaseResponseDTO listFollowers(@PathVariable int userId, @RequestParam(defaultValue = Constants.ORDER_METHOD_NAME_ASC)
             String order) throws UserNotFoundException {
         LOGGER.info("Llamado al endpoint * List followers *");
         return mtService.listFollowers(userId, order);
@@ -55,7 +55,7 @@ public class MeliToolsUsersController {
      * Returns the list of followed sellers of a user.
      * @author Daniel Alejandro López Hernández.*/
     @GetMapping(Constants.LIST_FOLLOWED_ENDPOINT)
-    public BaseResponse listFollowed(@PathVariable int userId, @RequestParam(defaultValue = Constants.ORDER_METHOD_NAME_ASC)
+    public BaseResponseDTO listFollowed(@PathVariable int userId, @RequestParam(defaultValue = Constants.ORDER_METHOD_NAME_ASC)
             String order) throws UserNotFoundException {
         LOGGER.info("Llamado al endpoint * List followed *");
         return mtService.listFollowed(userId, order);
@@ -66,7 +66,7 @@ public class MeliToolsUsersController {
      * @author Daniel Alejandro López Hernández
      * */
     @PostMapping(Constants.UNFOLLOW_ENDPOINT)
-    public ResponseSimple unFollowUser(@PathVariable int userId, @PathVariable int userIdToUnFollow) throws IOException, UserNotFoundException {
+    public ResponseSimpleDTO unFollowUser(@PathVariable int userId, @PathVariable int userIdToUnFollow) throws IOException, UserNotFoundException {
         LOGGER.info("Llamado al endpoint * Unfollow *");
         return mtService.unFollowUser(userId, userIdToUnFollow);
     }

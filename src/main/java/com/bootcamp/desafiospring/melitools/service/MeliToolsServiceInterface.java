@@ -10,13 +10,13 @@ import com.bootcamp.desafiospring.melitools.exception.UserNotFoundException;
 import java.io.IOException;
 
 public interface MeliToolsServiceInterface {
-    ResponseSimple followUser(int userId, int userIdToFollow) throws IOException, UserNotFoundException,
+    ResponseSimpleDTO followUser(int userId, int userIdToFollow) throws IOException, UserNotFoundException,
             UserAlreadyFollowedException;
-    ResponseFollowersCount countFollowers(int userId) throws UserNotFoundException;
-    ResponseListFollower listFollowers(int userId, String order) throws UserNotFoundException;
-    ResponseListFollowed listFollowed(int userId, String order) throws UserNotFoundException;
-    ResponseSimple generatePost(PostDTO request) throws UserNotFoundException, PostIdAlreadyAssignedException,
+    ResponseFollowersCountDTO countFollowers(int userId) throws UserNotFoundException;
+    ResponseListFollowerDTO listFollowers(int userId, String order) throws UserNotFoundException;
+    ResponseListFollowedDTO listFollowed(int userId, String order) throws UserNotFoundException;
+    ResponseSimpleDTO generatePost(PostDTO request) throws UserNotFoundException, PostIdAlreadyAssignedException,
             DateNotValidException, IOException;
-    ResponseRecentPosts getRecentPosts(int userId, String order) throws UserNotFoundException;
-    ResponseSimple unFollowUser(int userId, int userIdToUnFollow) throws IOException, UserNotFoundException;
+    ResponseRecentPostsDTO getRecentPosts(int userId, String order) throws UserNotFoundException;
+    ResponseSimpleDTO unFollowUser(int userId, int userIdToUnFollow) throws IOException, UserNotFoundException;
 }
