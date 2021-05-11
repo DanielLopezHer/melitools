@@ -9,9 +9,13 @@ import java.util.Arrays;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class ResponseListFollowerDTO extends BaseResponseDTO {
     private UserListNode[] followers;
+
+    public ResponseListFollowerDTO(int userId, String userName, UserListNode[] users) {
+        super(userId, userName);
+        this.followers = users;
+    }
 
     @Override
     public String toString() {

@@ -4,46 +4,40 @@
   "lastName" : "López",
   "followers" : [ 2 ],
   "followed" : [ 2, 3, 4 ],
-  "posts" : [ ],
-  "specialPosts" : [ ]
+  "posts" : [ ]
 }, {
   "userId" : 2,
   "name" : "Carlos",
   "lastName" : "López",
   "followers" : [ 1 ],
   "followed" : [ 1 ],
-  "posts" : [ ],
-  "specialPosts" : [ ]
+  "posts" : [ ]
 }, {
   "userId" : 3,
   "name" : "Alejandra",
   "lastName" : "Hernández",
   "followers" : [ 1 ],
   "followed" : [ ],
-  "posts" : [ ],
-  "specialPosts" : [ ]
+  "posts" : [ ]
 }, {
   "userId" : 4,
   "name" : "Bryan",
   "lastName" : "López",
   "followers" : [ 1 ],
   "followed" : [ ],
-  "posts" : [ ],
-  "specialPosts" : [ ]
+  "posts" : [ ]
 }, {
   "userId" : 5,
   "name" : "Paola",
   "lastName" : "Alonso",
   "followers" : [ ],
   "followed" : [ ],
-  "posts" : [ ],
-  "specialPosts" : [ ]
+  "posts" : [ ]
 }, {
   "userId" : 6,
   "name" : "Luis",
   "lastName" : "Vilchis",
   "followers" : [ ],
   "followed" : [ ],
-  "posts" : [ ],
-  "specialPosts" : [ ]
+  "posts" : [ ]
 } ]

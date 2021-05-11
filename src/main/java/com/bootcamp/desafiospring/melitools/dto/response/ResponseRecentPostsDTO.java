@@ -9,9 +9,13 @@ import java.util.Arrays;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class ResponseRecentPostsDTO extends BaseResponseDTO {
     private PostDTO[] recentPosts;
+
+    public ResponseRecentPostsDTO(int userId, String userName, PostDTO[] recentPosts) {
+        super(userId, userName);
+        this.recentPosts = recentPosts;
+    }
 
     @Override
     public String toString() {

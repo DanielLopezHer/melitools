@@ -56,9 +56,9 @@ public class MeliToolsService implements MeliToolsServiceInterface{
             throw new UserAlreadyFollowedException(followed.getUserId(), follower.getUserId());
 
         if (mtRepository.updateUsers())
-            return new ResponseSimpleDTO(Constants.USER_FOLLOWED, HttpStatus.OK);
+            return new ResponseSimpleDTO(HttpStatus.OK, Constants.USER_FOLLOWED);
         else
-            return new ResponseSimpleDTO(Constants.ERROR_USER_FOLLOWED, HttpStatus.BAD_REQUEST);
+            return new ResponseSimpleDTO(HttpStatus.BAD_REQUEST, Constants.ERROR_USER_FOLLOWED);
     }
 
     /**
@@ -150,7 +150,7 @@ public class MeliToolsService implements MeliToolsServiceInterface{
                 throw new DateNotValidException(Constants.DATE_NOT_VALID, HttpStatus.BAD_REQUEST);
         } else
             throw new PostIdAlreadyAssignedException(Constants.POST_ID_ASSIGNED, HttpStatus.BAD_REQUEST);
-        return new ResponseSimpleDTO(Constants.POST_GENERATED, HttpStatus.OK);
+        return new ResponseSimpleDTO(HttpStatus.OK, Constants.POST_GENERATED);
     }
 
     /**
@@ -198,8 +198,8 @@ public class MeliToolsService implements MeliToolsServiceInterface{
             followed.getFollowers().remove(Integer.valueOf(userId));
         }
         if (mtRepository.updateUsers())
-            return new ResponseSimpleDTO(Constants.USER_UNFOLLOWED, HttpStatus.OK);
+            return new ResponseSimpleDTO(HttpStatus.OK, Constants.USER_UNFOLLOWED);
         else
-            return new ResponseSimpleDTO(Constants.ERROR_USER_FOLLOWED, HttpStatus.BAD_REQUEST);
+            return new ResponseSimpleDTO(HttpStatus.BAD_REQUEST, Constants.ERROR_USER_FOLLOWED);
     }
 }

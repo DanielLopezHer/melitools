@@ -9,9 +9,13 @@ import java.util.Arrays;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class ResponseListFollowedDTO extends BaseResponseDTO {
     private UserListNode[] followed;
+
+    public ResponseListFollowedDTO(int userId, String userName, UserListNode[] users) {
+        super(userId, userName);
+        this.followed = users;
+    }
 
     @Override
     public String toString() {

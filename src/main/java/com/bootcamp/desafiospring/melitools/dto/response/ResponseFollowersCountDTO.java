@@ -6,7 +6,6 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class ResponseFollowersCountDTO extends BaseResponseDTO {
     private int followers_count;
 
