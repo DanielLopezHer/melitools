@@ -56,9 +56,13 @@ public class MeliToolsService implements MeliToolsServiceInterface{
             throw new UserAlreadyFollowedException(followed.getUserId(), follower.getUserId());
 
         if (mtRepository.updateUsers())
-            return new ResponseSimpleDTO(HttpStatus.OK, Constants.USER_FOLLOWED);
+            return ResponseSimpleDTO.builder()
+                    .status(HttpStatus.OK)
+                    .message(Constants.USER_FOLLOWED).build();
         else
-            return new ResponseSimpleDTO(HttpStatus.BAD_REQUEST, Constants.ERROR_USER_FOLLOWED);
+            return ResponseSimpleDTO.builder()
+                    .status(HttpStatus.BAD_REQUEST)
+                    .message(Constants.ERROR_USER_FOLLOWED).build();
     }
 
     /**
@@ -150,7 +154,9 @@ public class MeliToolsService implements MeliToolsServiceInterface{
                 throw new DateNotValidException(Constants.DATE_NOT_VALID, HttpStatus.BAD_REQUEST);
         } else
             throw new PostIdAlreadyAssignedException(Constants.POST_ID_ASSIGNED, HttpStatus.BAD_REQUEST);
-        return new ResponseSimpleDTO(HttpStatus.OK, Constants.POST_GENERATED);
+        return ResponseSimpleDTO.builder()
+                .status(HttpStatus.OK)
+                .message(Constants.POST_GENERATED).build();
     }
 
     /**
@@ -198,8 +204,12 @@ public class MeliToolsService implements MeliToolsServiceInterface{
             followed.getFollowers().remove(Integer.valueOf(userId));
         }
         if (mtRepository.updateUsers())
-            return new ResponseSimpleDTO(HttpStatus.OK, Constants.USER_UNFOLLOWED);
+            return ResponseSimpleDTO.builder()
+                    .status(HttpStatus.OK)
+                    .message(Constants.USER_UNFOLLOWED).build();
         else
-            return new ResponseSimpleDTO(HttpStatus.BAD_REQUEST, Constants.ERROR_USER_FOLLOWED);
+            return ResponseSimpleDTO.builder()
+                    .status(HttpStatus.BAD_REQUEST)
+                    .message(Constants.ERROR_USER_FOLLOWED).build();
     }
 }
